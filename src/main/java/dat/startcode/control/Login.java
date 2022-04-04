@@ -3,7 +3,7 @@ package dat.startcode.control;
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
-import dat.startcode.model.persistence.UserMapper;
+import dat.startcode.model.persistence.AdminMapper;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.ServletException;
@@ -39,7 +39,7 @@ public class Login extends HttpServlet
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
-        UserMapper userMapper = new UserMapper(connectionPool);
+        AdminMapper userMapper = new AdminMapper(connectionPool);
         User user = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");

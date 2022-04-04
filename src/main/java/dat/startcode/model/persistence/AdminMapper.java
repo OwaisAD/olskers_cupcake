@@ -7,11 +7,11 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserMapper implements IUserMapper
+public class AdminMapper implements IAdminMapper
 {
     ConnectionPool connectionPool;
 
-    public UserMapper(ConnectionPool connectionPool)
+    public AdminMapper(ConnectionPool connectionPool)
     {
         this.connectionPool = connectionPool;
     }

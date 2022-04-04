@@ -3,7 +3,7 @@ package dat.startcode.persistence;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.persistence.UserMapper;
+import dat.startcode.model.persistence.AdminMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,12 +21,12 @@ class UserMapperTest
     private final static String URL = "jdbc:mysql://localhost:3306/cupcake_test?serverTimezone=CET&allowPublicKeyRetrieval=true&useSSL=false";
 
     private static ConnectionPool connectionPool;
-    private static UserMapper userMapper;
+    private static AdminMapper userMapper;
 
     @BeforeAll
     public static void setUpClass() {
             connectionPool = new ConnectionPool(USER, PASSWORD, URL);
-            userMapper = new UserMapper(connectionPool);
+            userMapper = new AdminMapper(connectionPool);
     }
 
     @BeforeEach
