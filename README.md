@@ -1,5 +1,9 @@
 # default-web-applikation
 
+log
+https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing
+
+
 ## Startkode på 2. semester forår 2022
 
 Dette repository er lavet i forbindelse med 2. semester på
