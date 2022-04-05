@@ -1,10 +1,19 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.entities.Admin;
+import dat.startcode.model.entities.Customer;
+import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
+import java.util.List;
+
 public interface IAdminMapper
 {
-    public User login(String email, String kodeord) throws DatabaseException;
-    public User createUser(String username, String password, String role) throws DatabaseException;
+    public Admin login(String email, String password) throws DatabaseException;
+    public List<Customer> checkCustomerList() throws DatabaseException;
+    public List<Order> checkOrderList() throws DatabaseException;
+    /*TODO: Make a method for inserting credit into customer account
+     */
+
 }

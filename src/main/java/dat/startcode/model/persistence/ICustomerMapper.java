@@ -1,10 +1,17 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.entities.Cupcake;
+import dat.startcode.model.entities.Customer;
+import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
 public interface ICustomerMapper
 {
-    public User login(String email, String kodeord) throws DatabaseException;
-    public User createUser(String username, String password, String role) throws DatabaseException;
+    public Customer createProfile(String email, String password) throws DatabaseException;
+    public Customer login(String email, String password) throws DatabaseException;
+    public Order placeOrder(Cupcake cupcake, int amount) throws DatabaseException;
+    public boolean payForOrder(int totalPriceForCupcakes, int customerCredit) throws DatabaseException;
+    public Order checkOrder() throws DatabaseException;
+
 }
