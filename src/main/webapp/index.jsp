@@ -27,7 +27,7 @@
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
+            Start din rejse!
         </button>
 
         <!-- Modal -->
@@ -41,9 +41,9 @@
                     <div class="modal-body">
 
                         <form action="login" method="post">
-                            <label for="username">Username: </label>
+                            <label for="email">Username: </label>
                             <br>
-                            <input type="text" id="username" name="username"/>
+                            <input type="text" id="email" name="email"/>
                             <br>
                             <label for="password">Password: </label>
                             <br>
@@ -55,9 +55,12 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" aria-label="Close">
                             Ny bruger?
                         </button>
+
+
+
                     </div>
                 </div>
             </div>
