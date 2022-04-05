@@ -36,7 +36,7 @@ public class AddCredit extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        response.setContentType("text/html");
+/*        response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
         AdminMapper userMapper = new AdminMapper(connectionPool);
@@ -56,7 +56,7 @@ public class AddCredit extends HttpServlet
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        }
+        }*/
     }
 
     public void destroy()
