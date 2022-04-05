@@ -32,10 +32,12 @@ public class Login extends HttpServlet
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
+        log("jeg er i login servleten");
 /*        response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
