@@ -6,25 +6,24 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-             Error page
+             Fejlside
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-            Error page
+            Fejlside
     </jsp:attribute>
 
     <jsp:body>
 
-        <p>An error has occured. This is the best message we can come up
-            with right now: </p>
+        <p>Der skete en fejl. Muligvis grundet: </p>
 
         <c:if test="${pageContext.errorData.statusCode == 404 }">
-            <p><b>Error code:</b> ${pageContext.errorData.statusCode}</p>
+            <p><b>Fejl kode: </b> ${pageContext.errorData.statusCode}</p>
         </c:if>
 
         <c:if test="${pageContext.errorData.statusCode == 500 }">
-            <p><b>Error code:</b> ${pageContext.errorData.statusCode}</p>
-            <p>A serious error happened at the server.</p>
+            <p><b>Fejl kode: </b> ${pageContext.errorData.statusCode}</p>
+            <!--<p>A serious error happened at the server.</p>-->
         </c:if>
 
 
@@ -33,11 +32,11 @@
         </c:if>
 
         <c:if test="${requestScope.errormessage  == null}">
-            <p>Abandon ship. We have no idea how you ended up here!</p>
+            <!--<p>Abandon ship. We have no idea how you ended up here!</p>-->
         </c:if>
 
-        <p>Jump back to the <a href="index.jsp">Frontpage</a>,
-            or try <a href="login.jsp">logging</a> in again.</p>
+        <p>Hop tilbage til <a href="index.jsp">forsiden</a>,
+            eller prøv at <a href="login.jsp">logge</a> ind igen.</p>
 
     </jsp:body>
 </t:pagetemplate>

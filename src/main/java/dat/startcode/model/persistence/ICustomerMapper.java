@@ -8,7 +8,7 @@ import dat.startcode.model.exceptions.DatabaseException;
 
 public interface ICustomerMapper
 {
-    public Customer createProfile(String email, String password) throws DatabaseException;
+    public Customer createProfile(Customer customer) throws DatabaseException;
     public Customer login(String email, String password) throws DatabaseException;
     public Order placeOrder(Cupcake cupcake, int amount) throws DatabaseException;
     public boolean payForOrder(int totalPriceForCupcakes, int customerCredit) throws DatabaseException;

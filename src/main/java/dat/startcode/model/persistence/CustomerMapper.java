@@ -21,7 +21,7 @@ public class CustomerMapper implements ICustomerMapper
 
 
     @Override
-    public Customer createProfile(String email, String password) throws DatabaseException {
+    public Customer createProfile(Customer customer) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         boolean result = false;
         int newId = 0;
@@ -30,27 +30,26 @@ public class CustomerMapper implements ICustomerMapper
         {
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
             {
-                ps.setString(1, email);
-                ps.setString(2, password);
-                ps.setInt(3, 100); // ? lidt usikker på vores sql query + credit
-                ps.setString(4, "Customer");
+                ps.setString(1, customer.getEmail());
+                ps.setString(2, customer.getPassword());
+                ps.setInt(3, customer.getCredit());
+                ps.setString(4, customer.getRole());
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
                     result = true;
                 } else
                 {
-                    //skal det være sådan her ? burde vi have et customer objekt ind som paramater? som vi får fra servlet?
-                    //throw new DatabaseException("Customer med email = " + customer.getEmail() + " kunne ikke oprettes i databasen");
+                    throw new DatabaseException("Customer med email = " + customer.getEmail() + " kunne ikke oprettes i databasen");
                 }
                 ResultSet idResultset = ps.getGeneratedKeys();
                 if (idResultset.next())
                 {
                     newId = idResultset.getInt(1);
-                    laaner.setLaaner_id(newId);
+                    customer.setUserId(newId);
                 } else
                 {
-                    laaner = null;
+                    customer = null;
                 }
             }
         }
@@ -58,10 +57,9 @@ public class CustomerMapper implements ICustomerMapper
         {
             throw new DatabaseException(ex, "Kunne ikke indsætte låner i databasen");
         }
-        return laaner;
-
-
+        return customer;
     }
+
 
     @Override
     public Customer login(String email, String password) throws DatabaseException {

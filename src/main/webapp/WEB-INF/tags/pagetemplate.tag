@@ -17,12 +17,16 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-<header>
+
+<div>
+    <a href="index.jsp">
+    <img src="images/headercupcakeimage.png" alt="billeder af olskers cupcake" style="width: 100%; height: 280px; padding: 20px;">
+    </a>
+</div>
+
+<header style="padding: 0px 15px;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="${pageContext.request.contextPath}/images/cphbusiness.png" width="400px;" class="img-fluid"/>
-            </a>
+        <div class="container" style="padding: 5px;">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -44,26 +48,28 @@
     </nav>
 </header>
 
-<div id="body" class="container mt-4" style="min-height: 400px;">
+<div id="body" class="container mt-4" style="min-height: 400px; background-color: rgba(128, 128, 128, 5%);">
     <h1><jsp:invoke fragment="header"/></h1>
     <jsp:doBody/>
 </div>
 
 <!-- Footer -->
-<div class="container mt-3">
+<div class="container mt-3" style="background-color: rgba(128, 128, 128, 5%);">
     <hr/>
     <div class="row mt-4">
         <div class="col">
-            Nørgaardsvej 30<br/>
-            2800 Lyngby
+            <a href="mailto: olskers@cupcakes.com">Send os en email</a><br/>
+            <a href="tel: 70707070">Ring til os</a>
         </div>
         <div class="col">
-            <jsp:invoke fragment="footer"/><br/>
-            <p>&copy; 2022 Cphbusiness</p>
+            <p>Følg os på</p>
+            <p><img src="images/socialemedier/instagram.png" alt="facebook ikon" style="width: 30px; height: auto;">
+                <img src="images/socialemedier/facebook.png" alt="facebook ikon" style="width: 30px; height: auto;">
+                <img src="images/socialemedier/linkedin.png" alt="linkedin ikon" style="width: 30px; height: auto;"></p>
         </div>
         <div class="col">
-            Datamatikeruddannelsen<br/>
-            2. semester forår 2022
+            Peter Knudsens Vej<br/>
+            Cvr. 22334455
         </div>
     </div>
 

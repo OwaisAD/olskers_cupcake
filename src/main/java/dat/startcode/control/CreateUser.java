@@ -1,10 +1,12 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.AdminMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.CustomerMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,27 +38,29 @@ public class CreateUser extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-/*      response.setContentType("text/html");
+      response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("customer", null); // adding empty user object to session scope
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
         Customer customer = null;
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-
+        String email = request.getParameter("emailny");
+        String password = request.getParameter("passwordny");
+        int credit = 100;
+        String role = "Customer";
         try
         {
-            customer = customerMapper.createProfile(email, password);
+            customer = new Customer(email, password, credit, role);
+            customer = customerMapper.createProfile(customer);
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
-            //request.getRequestDispatcher("cupcakefactory.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        }*/
+        }
     }
 
     public void destroy()
