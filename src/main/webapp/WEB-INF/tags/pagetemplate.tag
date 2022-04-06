@@ -33,13 +33,62 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
-                    <c:if test="${sessionScope.user == null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
+                    <c:if test="${sessionScope.admin != null }">
+                        <form action="AdminNavigation" method="get">
+                            <input type="submit" id="ordrer" name="handling" type="button" value="Ordrer">
+                            <input type="submit" id="kunder" name="handling" type="button" value="Kunder">
+                        </form>
                     </c:if>
-                    <c:if test="${sessionScope.user != null }">
+                    <c:if test="${sessionScope.customer != null }">
+                        <p class="nav-item">${sessionScope.email}</p>
+                    </c:if>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Forside</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/omos.jsp">Om os</a>
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Profil</a>
+                    <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">KURVIKON</a>
+                    </c:if>
+
+                    <c:if test="${sessionScope.admin == null && sessionScope.customer == null}">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Log ind!
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Du kan logge ind her</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="login" method="post">
+                                        <label for="email">Email: </label>
+                                        <br>
+                                        <input type="email" id="email" name="email" required/>
+                                        <br>
+                                        <label for="password">Kodeord: </label>
+                                        <br>
+                                        <input type="password" id="password" name="password" minlength="4" required/>
+                                        <br>
+                                        <br>
+                                        <input type="submit"  value="Log ind"/>
+                                        <br>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2" aria-label="Close" data-dismiss="#exampleModal">
+                                        Ikke medlem endnu? Klik her.
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </c:if>
+
+                    <c:if test="${sessionScope.customer != null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
                 </div>

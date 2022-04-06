@@ -1,29 +1,41 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page errorPage="error.jsp" isErrorPage="false" %>
+<%@page errorPage="../error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Forside
+         Admin
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Forside
+        Admin
     </jsp:attribute>
 
     <jsp:body>
+        <h3>Her listen over alle kunders ordrer</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Tid bestilt</th>
+                <th>Email</th>
+                <th>Order ID</th>
+                <th>Saldo sum</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <p>Startcode for 2nd semester </p>
+            <c:forEach var="order" items="${sessionScope.orderlist}">
+                <tr>
+                    <td>${order.created}</td>
+                    <td>${order.email}</td>
+                    <td>${order.orderId}</td>
+                    <td>${order.totalSum}</td>
+                </tr>
+            </c:forEach>
 
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-        </c:if>
-
-        <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
-        </c:if>
+            </tbody>
+        </table>
 
     </jsp:body>
 
