@@ -1,5 +1,7 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.dtos.AllOrderlinesDTO;
+import dat.startcode.model.dtos.OrderListDTO;
 import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
@@ -7,6 +9,9 @@ import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,7 +59,31 @@ public class AdminMapper implements IAdminMapper
     }
 
     @Override
-    public List<Order> checkOrderList() throws DatabaseException {
-        return null;
+    public List<OrderListDTO> checkOrderList() throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO,"");
+
+        List<OrderListDTO> orderListDTOS = new ArrayList<>();
+
+        String sql = "SELECT * FROM list_of_customers_orders";
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String date = rs.getString("created");
+                    String email = rs.getString("email");
+                    int orderId = rs.getInt("order_id");
+                    int totalPrice = rs.getInt("totalsum");
+                    orderListDTOS.add(new OrderListDTO(date,email,orderId,totalPrice));
+                }
+            }catch (SQLException throwables) {
+                throw new DatabaseException("Kunne ikke få alle ordrer fra database");
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException("Kunne få forbindelse til databasen");
+        }
+
+        return orderListDTOS;
     }
 }

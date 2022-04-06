@@ -1,6 +1,7 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.dtos.AllOrderlinesDTO;
 import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.User;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,6 +31,8 @@ public class Login extends HttpServlet
     public void init() throws ServletException
     {
         this.connectionPool = ApplicationStart.getConnectionPool();
+        List<AllOrderlinesDTO> aOLD = new ArrayList<>();
+        AdminMapper adminMapper = new AdminMapper(connectionPool);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException

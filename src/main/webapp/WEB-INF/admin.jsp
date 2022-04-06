@@ -13,8 +13,22 @@
     </jsp:attribute>
 
     <jsp:body>
+        <h3>Her listen over alle kunders ordrer</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Tid bestilt</th>
+                <th>Email</th>
+                <th>Order ID</th>
+                <th>Saldo sum</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <p>Startcode for 3rd semester </p>
+            <c:forEach var="AllOrderlinesDTO" items="${requestScope.}"
+
+            </tbody>
+        </table>
 
 
 
