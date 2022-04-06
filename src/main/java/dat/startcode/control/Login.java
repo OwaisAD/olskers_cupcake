@@ -56,9 +56,9 @@ public class Login extends HttpServlet
 //            user = userMapper.login(username, password);
             customer = customerMapper.login(email,password);
             session = request.getSession();
-            session.setAttribute("user", customer); // adding user object to session scope
+            session.setAttribute("customer", customer); // adding user object to session scope
             log("##"+customer);
-            request.getRequestDispatcher("omos.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
