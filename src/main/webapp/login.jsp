@@ -22,6 +22,7 @@
             <input type="text" id="username" name="username"/>
             <label for="password">Password: </label>
             <input type="password" id="password" name="password"/>
+            <!--<p>Ikke medlem endnu? Klik her</p>-->
             <input type="submit"  value="Log in"/>
         </form>
 

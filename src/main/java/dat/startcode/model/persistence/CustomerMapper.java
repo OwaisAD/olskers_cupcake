@@ -6,10 +6,7 @@ import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +22,45 @@ public class CustomerMapper implements ICustomerMapper
 
     @Override
     public Customer createProfile(String email, String password) throws DatabaseException {
-        return null;
+        Logger.getLogger("web").log(Level.INFO, "");
+        boolean result = false;
+        int newId = 0;
+        String sql = "insert into user (email, password, credit, role) values (?,?,?,?)";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
+            {
+                ps.setString(1, email);
+                ps.setString(2, password);
+                ps.setInt(3, 100); // ? lidt usikker på vores sql query + credit
+                ps.setString(4, "Customer");
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1)
+                {
+                    result = true;
+                } else
+                {
+                    //skal det være sådan her ? burde vi have et customer objekt ind som paramater? som vi får fra servlet?
+                    //throw new DatabaseException("Customer med email = " + customer.getEmail() + " kunne ikke oprettes i databasen");
+                }
+                ResultSet idResultset = ps.getGeneratedKeys();
+                if (idResultset.next())
+                {
+                    newId = idResultset.getInt(1);
+                    laaner.setLaaner_id(newId);
+                } else
+                {
+                    laaner = null;
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Kunne ikke indsætte låner i databasen");
+        }
+        return laaner;
+
+
     }
 
     @Override

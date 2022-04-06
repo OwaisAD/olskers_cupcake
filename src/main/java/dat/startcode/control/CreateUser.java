@@ -36,20 +36,20 @@ public class CreateUser extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-/*        response.setContentType("text/html");
+/*      response.setContentType("text/html");
         HttpSession session = request.getSession();
-        session.setAttribute("user", null); // adding empty user object to session scope
-        AdminMapper userMapper = new AdminMapper(connectionPool);
-        User user = null;
-        String username = request.getParameter("username");
+        session.setAttribute("customer", null); // adding empty user object to session scope
+        CustomerMapper customerMapper = new CustomerMapper(connectionPool);
+        Customer customer = null;
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         try
         {
-            user = userMapper.login(username, password);
+            customer = customerMapper.createProfile(email, password);
             session = request.getSession();
-            session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            session.setAttribute("customer", customer); // adding user object to session scope
+            //request.getRequestDispatcher("cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
