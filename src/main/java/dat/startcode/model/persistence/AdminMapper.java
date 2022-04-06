@@ -23,7 +23,29 @@ public class AdminMapper implements IAdminMapper
 
     @Override
     public Admin login(String email, String password) throws DatabaseException {
-        return null;
+        Logger.getLogger("web").log(Level.INFO,"");
+
+        Admin admin;
+
+        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ps.setString(1,email);
+                ps.setString(2,password);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String role = rs.getString("role");
+                    admin = new Admin(email,password,role);
+                } else {
+                    throw new DatabaseException("Forkert brugernavn og/eller kodeord");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex,"Noget gik forkert");
+        }
+
+        return admin;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
@@ -39,26 +40,30 @@ public class Login extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        log("jeg er i login servleten");
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
-//        User user = null;
         Customer customer;
+        AdminMapper adminMapper = new AdminMapper(connectionPool);
+        Admin admin;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        log("email og password: "+email+" "+password);
-
 
         try
         {
-//            user = userMapper.login(username, password);
             customer = customerMapper.login(email,password);
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
-            log("##"+customer);
-            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
+            session.setAttribute("email",customer.getEmail());
+            String role = customer.getRole();
+            if (role.equals("Customer")) {
+                request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
+            } else {
+                admin = adminMapper.login(email,password);
+                session.setAttribute("admin",admin);
+                request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
+            }
         }
         catch (DatabaseException e)
         {

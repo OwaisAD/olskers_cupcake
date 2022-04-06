@@ -33,13 +33,16 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <c:if test="${sessionScope.customer != null }">
+                        <p class="nav-item">${sessionScope.email}</p>
+                    </c:if>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
-                    <c:if test="${sessionScope.user == null }">
+                    <c:if test="${sessionScope.customer == null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     </c:if>
-                    <c:if test="${sessionScope.user != null }">
+                    <c:if test="${sessionScope.customer != null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
                 </div>
