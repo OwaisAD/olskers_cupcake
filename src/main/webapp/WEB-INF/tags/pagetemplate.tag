@@ -33,6 +33,12 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
+                    <c:if test="${sessionScope.admin != null }">
+                        <form action="AdminNavigation" method="get">
+                            <input type="submit" id="ordrer" name="handling" type="button" value="Ordrer">
+                            <input type="submit" id="kunder" name="handling" type="button" value="Kunder">
+                        </form>
+                    </c:if>
                     <c:if test="${sessionScope.customer != null }">
                         <p class="nav-item">${sessionScope.email}</p>
                     </c:if>

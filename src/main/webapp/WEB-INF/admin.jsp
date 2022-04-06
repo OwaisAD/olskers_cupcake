@@ -14,7 +14,7 @@
 
     <jsp:body>
         <h3>Her listen over alle kunders ordrer</h3>
-        <table>
+        <table class="table table-striped">
             <thead>
             <tr>
                 <th>Tid bestilt</th>
@@ -25,12 +25,17 @@
             </thead>
             <tbody>
 
-            <c:forEach var="AllOrderlinesDTO" items="${requestScope.}"
+            <c:forEach var="order" items="${sessionScope.orderlist}">
+                <tr>
+                    <td>${order.created}</td>
+                    <td>${order.email}</td>
+                    <td>${order.orderId}</td>
+                    <td>${order.totalSum}</td>
+                </tr>
+            </c:forEach>
 
             </tbody>
         </table>
-
-
 
     </jsp:body>
 

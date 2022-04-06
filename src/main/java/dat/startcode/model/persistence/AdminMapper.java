@@ -59,7 +59,7 @@ public class AdminMapper implements IAdminMapper
     }
 
     @Override
-    public List<OrderListDTO> checkOrderList() throws DatabaseException {
+    public List<OrderListDTO> getOrderList() throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO,"");
 
         List<OrderListDTO> orderListDTOS = new ArrayList<>();

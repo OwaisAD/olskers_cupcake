@@ -2,9 +2,9 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.dtos.AllOrderlinesDTO;
+import dat.startcode.model.dtos.OrderListDTO;
 import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
-import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.AdminMapper;
 import dat.startcode.model.persistence.ConnectionPool;
@@ -65,7 +65,10 @@ public class Login extends HttpServlet
             if (role.equals("Customer")) {
                 request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
             } else {
+                // Når admin logger ind
+                List<OrderListDTO> orderListDTOS = adminMapper.getOrderList();
                 admin = adminMapper.login(email,password);
+                session.setAttribute("orderlist",orderListDTOS);
                 session.setAttribute("admin",admin);
                 request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
             }
