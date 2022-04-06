@@ -36,7 +36,7 @@
         </c:if>
 
         <p>Hop tilbage til <a href="index.jsp">forsiden</a>,
-            eller prøv at <a href="login.jsp">logge</a> ind igen.</p>
+             for at logge ind igen.</p>
 
     </jsp:body>
 </t:pagetemplate>

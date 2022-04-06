@@ -65,16 +65,16 @@
                     <div class="modal-body">
 
                         <form action="login" method="post">
-                            <label for="email">Username: </label>
+                            <label for="email">Email: </label>
                             <br>
-                            <input type="email" id="email" name="email"/>
+                            <input type="email" id="email" name="email" required/>
                             <br>
-                            <label for="password">Password: </label>
+                            <label for="password">Kodeord: </label>
                             <br>
-                            <input type="password" id="password" name="password"/>
+                            <input type="password" id="password" name="password" minlength="4" required/>
                             <br>
                             <br>
-                            <input type="submit"  value="Log in"/>
+                            <input type="submit"  value="Log ind"/>
                             <br>
                         </form>
                     </div>

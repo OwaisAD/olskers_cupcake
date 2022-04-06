@@ -1,7 +1,9 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.Customer;
+import dat.startcode.model.entities.Topping;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.AdminMapper;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,6 +53,8 @@ public class Login extends HttpServlet
         String password = request.getParameter("password");
         log("email og password: "+email+" "+password);
 
+        List<Bottom> bottomsList = null;
+        List<Topping> toppingsList = null;
 
         try
         {
@@ -58,6 +63,13 @@ public class Login extends HttpServlet
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
             log("##"+customer);
+
+            bottomsList = customerMapper.getAllBottoms();
+            request.setAttribute("bottomlist", bottomsList);
+
+            toppingsList = customerMapper.getAllToppings();
+            request.setAttribute("toppinglist", toppingsList);
+
             request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)

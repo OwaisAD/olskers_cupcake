@@ -1,12 +1,11 @@
 package dat.startcode.model.persistence;
 
-import dat.startcode.model.entities.Cupcake;
-import dat.startcode.model.entities.Customer;
-import dat.startcode.model.entities.Order;
-import dat.startcode.model.entities.User;
+import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -102,4 +101,63 @@ public class CustomerMapper implements ICustomerMapper
     public Order checkOrder() throws DatabaseException {
         return null;
     }
+
+    @Override
+    public List<Bottom> getAllBottoms() throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        List<Bottom> getAllBottomsList = new ArrayList<>();
+
+        String sql = "SELECT * FROM bottom";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ResultSet rs = ps.executeQuery();
+
+                while(rs.next()) {
+                    int bottomId = rs.getInt("bottom_id");
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+
+                    Bottom bottom = new Bottom(bottomId, name, price);
+                    getAllBottomsList.add(bottom);
+                    //System.out.println(getAllBottomsList.size());
+                }
+            }
+        }
+        catch (Exception ex) {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+        }
+        return getAllBottomsList;
+    }
+
+    @Override
+    public List<Topping> getAllToppings() throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        List<Topping> getAllToppingsList = new ArrayList<>();
+
+        String sql = "SELECT * FROM topping";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ResultSet rs = ps.executeQuery();
+
+                while(rs.next()) {
+                    int toppingId = rs.getInt("topping_id");
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+
+                    Topping topping = new Topping(toppingId, name, price);
+                    getAllToppingsList.add(topping);
+                    //System.out.println(getAllBottomsList.size());
+                }
+            }
+        }
+        catch (Exception ex) {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+        }
+        return getAllToppingsList;
+    }
+
 }
