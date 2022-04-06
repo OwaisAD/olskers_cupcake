@@ -1,10 +1,12 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.AdminMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.CustomerMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,31 +34,38 @@ public class Login extends HttpServlet
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
+
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-/*        response.setContentType("text/html");
+        log("jeg er i login servleten");
+        response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
-        AdminMapper userMapper = new AdminMapper(connectionPool);
-        User user = null;
-        String username = request.getParameter("username");
+        CustomerMapper customerMapper = new CustomerMapper(connectionPool);
+//        User user = null;
+        Customer customer;
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
+        log("email og password: "+email+" "+password);
+
 
         try
         {
-            user = userMapper.login(username, password);
+//            user = userMapper.login(username, password);
+            customer = customerMapper.login(email,password);
             session = request.getSession();
-            session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            session.setAttribute("customer", customer); // adding user object to session scope
+            log("##"+customer);
+            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        }*/
+        }
     }
 
     public void destroy()

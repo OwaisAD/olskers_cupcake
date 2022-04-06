@@ -1,6 +1,7 @@
 package dat.startcode.model.entities;
 
 public class Customer {
+
     private int userId;
     private String email;
     private String password;
@@ -52,4 +53,11 @@ public class Customer {
                 ", role='" + role + '\'' +
                 '}';
     }
+
+    public Customer(String email, String password, String role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
 }
