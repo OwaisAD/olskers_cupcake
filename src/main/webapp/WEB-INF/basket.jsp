@@ -22,7 +22,7 @@
                 <tr>
                     <th>Dine cupcakes</th>
                     <th>Antal</th>
-                    <th>Fjern</th>
+                    <th>Rediger</th>
                 </tr>
             </thead>
 
@@ -33,8 +33,10 @@
                         <td>Cupcake med ${cupcake.bottom.getName()} bund og ${cupcake.topping.getName()} topping</td>
                         <td>Antal: ${cupcake.amount}</td>
                         <td>
-                             <button type="button" name="fullnameid" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-close"></i></button>
+                             <button type="button" name="remove" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-close"></i></button>
+                            <button type="button" name="add" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-plus"></i></button>
                         </td>
+
                         <input hidden name="bottomname" value="${cupcake.bottom.getName()}">
                         <input hidden name="toppingname" value="${cupcake.topping.getName()}">
                     </tr>
@@ -48,8 +50,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-
-
                                         <label for="amounttodelete">Antal: </label>
                                         <br>
                                         <input type="number" min="1" max="1000000000000" id="amounttodelete" name="amounttodelete" required/>
