@@ -12,7 +12,6 @@ public interface IAdminMapper
     public Admin login(String email, String password) throws DatabaseException;
     public List<Customer> checkCustomerList() throws DatabaseException;
     public List<OrderListDTO> getOrderList() throws DatabaseException;
-    /*TODO: Make a method for inserting credit into customer account
-     */
+    public Customer newCreditCustomer(Customer customer) throws DatabaseException;
 
 }

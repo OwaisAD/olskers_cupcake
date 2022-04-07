@@ -108,4 +108,25 @@ public class AdminMapper implements IAdminMapper
 
         return orderListDTOS;
     }
+
+    @Override
+    public Customer newCreditCustomer(Customer customer) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO,"");
+
+
+        String sql = "UPDATE user SET credit = credit + ? WHERE email = ?";
+
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ps.setInt(1,customer.getCredit());
+                ps.setString(2,customer.getEmail());
+                ps.executeUpdate();
+
+            }
+        }catch (SQLException ex) {
+            throw new DatabaseException("Kunne ikke indsætte beløb på konto: "+customer.getEmail());
+        }
+        return customer;
+    }
 }
