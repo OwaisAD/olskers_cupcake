@@ -18,10 +18,10 @@ public class AdminNavigation extends HttpServlet {
         String handling = request.getParameter("handling");
         log(handling);
         if (handling.equals("Ordrer")) {
-            request.getRequestDispatcher("WEB-INF/admin.jsp");
+            request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
         }
         if (handling.equals("Kunder")) {
-            request.getRequestDispatcher("WEB-INF/customers.jsp");
+            request.getRequestDispatcher("WEB-INF/customers.jsp").forward(request,response);
         }
     }
 
