@@ -23,6 +23,11 @@ public class Customer {
         this.role = role;
     }
 
+    public Customer(String email, int credit) {
+        this.email = email;
+        this.credit = credit;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }
