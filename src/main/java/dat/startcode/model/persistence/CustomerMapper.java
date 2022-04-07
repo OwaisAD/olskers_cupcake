@@ -75,7 +75,8 @@ public class CustomerMapper implements ICustomerMapper
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String role = rs.getString("role");
-                    customer = new Customer(email,password,role);
+                    int credit = rs.getInt("credit");
+                    customer = new Customer(email,password,credit, role);
                 } else {
                     throw new DatabaseException("Forkert brugernavn og/eller kodeord");
                 }
@@ -132,6 +133,35 @@ public class CustomerMapper implements ICustomerMapper
     }
 
     @Override
+    public Bottom getBottomById(int bottomId) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        Bottom bottom = null;
+        String sql = "SELECT * FROM bottom WHERE bottom_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ps.setInt(1, bottomId);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+
+                    bottom = new Bottom(name, price);
+                } else {
+                    throw new DatabaseException("Bottom med bottomId = " + bottomId + " findes ikke");
+                }
+            }
+        } catch (Exception ex)
+        {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+        }
+        return bottom;
+    }
+
+    @Override
     public List<Topping> getAllToppings() throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         List<Topping> getAllToppingsList = new ArrayList<>();
@@ -159,5 +189,36 @@ public class CustomerMapper implements ICustomerMapper
         }
         return getAllToppingsList;
     }
+
+    @Override
+    public Topping getToppingById(int toppingId) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        Topping topping = null;
+        String sql = "SELECT * FROM topping WHERE topping_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ps.setInt(1, toppingId);
+                ResultSet rs = ps.executeQuery();
+
+
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    int price = rs.getInt("price");
+
+                    topping = new Topping(name, price);
+                } else {
+                    throw new DatabaseException("Topping med toppingId = " + toppingId + " findes ikke");
+                }
+            }
+        } catch (Exception ex)
+        {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+        }
+        return topping;
+    }
+
 
 }

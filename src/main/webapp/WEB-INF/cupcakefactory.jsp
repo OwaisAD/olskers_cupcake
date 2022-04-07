@@ -20,29 +20,27 @@
         <!--dette er venstre side på siden, altså alle dropdown menuerne-->
         <div>
             <!--følgende er venstre side af dropdown menuerne altså der hvor man kan vælge bund og topping-->
+            <form action="addtobasket" method="post">
             <div>
-
-                <form action="">
                 <label for="bottoms">Vælg en bund:</label>
                    <select name="bottoms" id="bottoms">
-                        <c:forEach items="${bottomlist}" var="bottoms">
+                        <c:forEach items="${applicationScope.bottomlist}" var="bottoms">
                             <option value="${bottoms.bottomId}">${bottoms.name}</option>
                         </c:forEach>
                     </select>
                     <br><br>
                     <label for="toppings">Vælg en topping:</label>
                     <select name="toppings" id="toppings">
-                        <c:forEach items="${toppinglist}" var="toppings">
+                        <c:forEach items="${applicationScope.toppinglist}" var="toppings">
                             <option value="${toppings.toppingId}">${toppings.name}</option>
                         </c:forEach>
                     </select>
-
-
             </div>
 
             <!--følgende er højre side af dropdown menuerne altså der hvor man kan vælge antal-->
             <div>
-                <select name="" id="">
+                <label for="amount">Vælg antal: </label>
+                <select name="amount" id="amount">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -61,16 +59,28 @@
                 </select>
             </div>
 
-            <button>Læg i kurv</button>
-
+                <input type="submit" value="Læg i kurv">
             </form>
+
         </div>
         
         <!--dette er højre side på siden, altså der hvor man ser cupcakes pris og kredit tilbage-->
-        <div>
+        <div style="background-color: white">
             <!--Pris pr cupcakes-->
             <!--Pris i alt: -->
             <!--Kredit tilbage-->
+            <form action="openbasket" method="post">
+                <p>Prisen for valgt cupcake: ${cupcake.getPrice()},-</p>
+                <p>Pris i alt for ${applicationScope.amount} cupcakes: ${applicationScope.pricetotal},-</p>
+                <hr>
+                <p>Sidst valgte cupcake:</p>
+                <p>Bund: ${cupcake.getBottom().getName()} (${cupcake.getBottom().getPrice()} kr)</p>
+                <p>Topping: ${cupcake.getTopping().getName()} (${cupcake.getTopping().getPrice()} kr)</p>
+                <hr>
+                <p>Ledig kredit: ${customer.getCredit()}</p>
+                <hr>
+                <input type="submit" value="Gå til kurv">
+            </form>
         </div>
 
 

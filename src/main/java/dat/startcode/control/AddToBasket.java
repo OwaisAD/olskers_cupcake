@@ -1,10 +1,15 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.dtos.BasketListDTO;
+import dat.startcode.model.entities.Bottom;
+import dat.startcode.model.entities.Cupcake;
+import dat.startcode.model.entities.Topping;
 import dat.startcode.model.entities.User;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.AdminMapper;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.CustomerMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +27,9 @@ import java.util.logging.Logger;
 public class AddToBasket extends HttpServlet
 {
     private ConnectionPool connectionPool;
+    int amount = 0;
+    static int pricetotal = 0;
+    List<BasketListDTO> basketList = new ArrayList<>();
 
     @Override
     public void init() throws ServletException
@@ -36,27 +46,58 @@ public class AddToBasket extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
- /*       response.setContentType("text/html");
+        response.setContentType("text/html");
         HttpSession session = request.getSession();
-        session.setAttribute("user", null); // adding empty user object to session scope
-        AdminMapper userMapper = new AdminMapper(connectionPool);
-        User user = null;
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        int bottomId = Integer.parseInt(request.getParameter("bottoms"));
+        int toppingId = Integer.parseInt(request.getParameter("toppings"));
+        int currAmount = Integer.parseInt(request.getParameter("amount"));
+        amount += currAmount;
 
-        try
-        {
-            user = userMapper.login(username, password);
+
+        try {
             session = request.getSession();
-            session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            CustomerMapper customerMapper = new CustomerMapper(connectionPool);
+
+            Bottom bottom = customerMapper.getBottomById(bottomId);
+            Topping topping = customerMapper.getToppingById(toppingId);
+            Cupcake cupcake = new Cupcake(bottom, topping);
+            String bottomName = bottom.getName();
+            String toppingName = topping.getName();
+
+            pricetotal += cupcake.getPrice()*currAmount;
+
+            BasketListDTO basketListDTO = new BasketListDTO(bottom, topping, currAmount);
+
+            //iterer over vores liste
+            // sammenlign bund og topping
+            //findes de allerede så tilføj antallet kun
+            boolean existing = false;
+            for (BasketListDTO listDTO : basketList) {
+                    if(listDTO.getBottom().getName().equals(basketListDTO.getBottom().getName()) && listDTO.getTopping().getName().equals(basketListDTO.getTopping().getName())) {
+                        listDTO.setAmount(listDTO.getAmount()+currAmount);
+                        existing = true;
+                    }
+                    if(existing) {
+                        break;
+                    }
+            }
+            if(!existing) {
+                basketList.add(basketListDTO);
+            }
+
+            session.setAttribute("basketlist", basketList);
+            getServletContext().setAttribute("amount", amount);
+            getServletContext().setAttribute("pricetotal", pricetotal);
+            session.setAttribute("cupcake", cupcake);
         }
         catch (DatabaseException e)
         {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
-        }*/
+        }
+
+        request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
     }
 
     public void destroy()

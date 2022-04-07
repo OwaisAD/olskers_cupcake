@@ -13,5 +13,8 @@ public interface ICustomerMapper
     public boolean payForOrder(int totalPriceForCupcakes, int customerCredit) throws DatabaseException;
     public Order checkOrder() throws DatabaseException;
     public List<Bottom> getAllBottoms() throws DatabaseException;
+    public Bottom getBottomById(int bottomId) throws DatabaseException;
     public List<Topping> getAllToppings() throws DatabaseException;
+    public Topping getToppingById(int toppingId) throws DatabaseException;
+
 }

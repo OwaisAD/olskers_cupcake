@@ -73,10 +73,10 @@ public class Login extends HttpServlet
             log("##"+customer);
 
             bottomsList = customerMapper.getAllBottoms();
-            request.setAttribute("bottomlist", bottomsList);
+            getServletContext().setAttribute("bottomlist", bottomsList);
 
             toppingsList = customerMapper.getAllToppings();
-            request.setAttribute("toppinglist", toppingsList);
+            getServletContext().setAttribute("toppinglist", toppingsList);
 
             session.setAttribute("email",customer.getEmail());
             String role = customer.getRole();
