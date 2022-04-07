@@ -89,8 +89,10 @@
                     </div>
                     </c:if>
 
-                    <c:if test="${sessionScope.customer != null }">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                    <c:if test="${sessionScope.customer != null || sessionScope.admin != null}">
+                        <button formaction="logout">
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                        </button>
                     </c:if>
                 </div>
             </div>
