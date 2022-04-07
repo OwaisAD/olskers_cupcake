@@ -85,8 +85,10 @@ public class Login extends HttpServlet
             } else {
                 // Når admin logger ind
                 List<OrderListDTO> orderListDTOS = adminMapper.getOrderList();
+                List<Customer> customerList = adminMapper.checkCustomerList();
                 admin = adminMapper.login(email,password);
                 session.setAttribute("orderlist",orderListDTOS);
+                session.setAttribute("customerlist",customerList);
                 session.setAttribute("admin",admin);
                 request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
             }

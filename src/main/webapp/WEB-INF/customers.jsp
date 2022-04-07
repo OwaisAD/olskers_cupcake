@@ -5,16 +5,33 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Forside
+         Admin
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        Forside
+        Admin
     </jsp:attribute>
 
     <jsp:body>
-
-        <p>Startcode for 42nd semester </p>
+        <h3>Her er listen over alle registreret kunder i databasen</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Kunde's kredit</th>
+                <th>Tilføj mere kredit til kunde's konto</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="kunder" items="${sessionScope.customerlist}">
+                <tr>
+                    <td>${kunder.email}</td>
+                    <td>${kunder.credit}</td>
+                    <td><button type="button" class="btn btn-dark">Tilføj</button></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
 
 
     </jsp:body>

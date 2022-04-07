@@ -55,7 +55,29 @@ public class AdminMapper implements IAdminMapper
 
     @Override
     public List<Customer> checkCustomerList() throws DatabaseException {
-        return null;
+        Logger.getLogger("web").log(Level.INFO,"");
+
+        List<Customer> customerList = new ArrayList<>();
+
+        String sql = "SELECT email, credit FROM user WHERE role = 'Customer'";
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    String email = rs.getString("email");
+                    int credit = rs.getInt("credit");
+                    customerList.add(new Customer(email,credit));
+                }
+            }catch (SQLException throwables) {
+                throw new DatabaseException("Kunne ikke få alle kunder fra database");
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException("Kunne få forbindelse til databasen");
+        }
+
+        return customerList;
     }
 
     @Override
