@@ -227,23 +227,23 @@ public class CustomerMapper implements ICustomerMapper
 
         List<OrderlineDescriptionDTO> customerOrders = new ArrayList<>();
 
-        String sql = "SELECT email, order_id, l.quantity as antal, b.name as bname, t.name as tname, (b.price + t.price) AS stykpris\n" +
-                "from user\n" +
-                "inner join ordered as o\n" +
-                "using (user_id)\n" +
-                "inner join orderline as l\n" +
-                "using (order_id)\n" +
-                "inner join bottom as b\n" +
-                "using (bottom_id)\n" +
-                "inner join topping as t\n" +
-                "using (topping_id)\n" +
+        String sql = "SELECT email, order_id, l.quantity as antal, b.name as bname, t.name as tname, (b.price + t.price) AS stykpris " +
+                "from user " +
+                "inner join ordered as o " +
+                "using (user_id) " +
+                "inner join orderline as l " +
+                "using (order_id) " +
+                "inner join bottom as b " +
+                "using (bottom_id) " +
+                "inner join topping as t " +
+                "using (topping_id) " +
                 "where email = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
+                while (rs.next()) {
 
                     int orderId = rs.getInt("order_id");
                     int antal = rs.getInt("antal");

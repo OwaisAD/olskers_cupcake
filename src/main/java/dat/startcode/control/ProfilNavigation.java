@@ -25,15 +25,16 @@ public class ProfilNavigation extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        HttpSession session;
+        HttpSession session = request.getSession();
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
-        String email = request.getParameter("email");
+        String email = (String) session.getAttribute("email");
+        System.out.println(email);
 
         try {
             List<OrderlineDescriptionDTO> list = customerMapper.getCustermersOrders(email);
-            session = request.getSession();
             session.setAttribute("list",list);
+            System.out.println(list.size());
             request.getRequestDispatcher("WEB-INF/profil.jsp").forward(request,response);
         } catch (DatabaseException e) {
             e.printStackTrace();

@@ -46,6 +46,9 @@
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Forside</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/omos.jsp">Om os</a>
                     <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Cupcake maker</a>
+                    </c:if>
+                    <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/ProfilNavigation">Profil</a>
                     </c:if>
                     <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
