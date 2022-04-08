@@ -1,6 +1,7 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Topping;
@@ -84,10 +85,16 @@ public class Login extends HttpServlet
                 request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
             } else {
                 // Når admin logger ind
+
+
+                List<OrderlineDescriptionDTO> orderlineDescriptionDTOS = adminMapper.getOrderlineDescription();
                 List<OrderListDTO> orderListDTOS = adminMapper.getOrderList();
+                //int orderListLenght = orderListDTOS.size();
                 List<Customer> customerList = adminMapper.checkCustomerList();
                 admin = adminMapper.login(email,password);
+                session.setAttribute("orderlineDescription",orderlineDescriptionDTOS);
                 session.setAttribute("orderlist",orderListDTOS);
+                //session.setAttribute("orderListLenght",orderListLenght);
                 session.setAttribute("customerlist",customerList);
                 session.setAttribute("admin",admin);
                 request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);

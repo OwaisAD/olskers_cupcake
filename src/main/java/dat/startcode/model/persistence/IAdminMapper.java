@@ -1,6 +1,7 @@
 package dat.startcode.model.persistence;
 
 import dat.startcode.model.dtos.OrderListDTO;
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.exceptions.DatabaseException;
@@ -13,5 +14,7 @@ public interface IAdminMapper
     public List<Customer> checkCustomerList() throws DatabaseException;
     public List<OrderListDTO> getOrderList() throws DatabaseException;
     public Customer newCreditCustomer(Customer customer) throws DatabaseException;
+    public List<OrderlineDescriptionDTO> getOrderlineDescription() throws DatabaseException;
+    public List<OrderlineDescriptionDTO> descriptionOfOrder (int orderId) throws DatabaseException;
 
 }

@@ -2,6 +2,7 @@ package dat.startcode.model.persistence;
 
 import dat.startcode.model.dtos.AllOrderlinesDTO;
 import dat.startcode.model.dtos.OrderListDTO;
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.Admin;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
@@ -109,6 +110,77 @@ public class AdminMapper implements IAdminMapper
         return orderListDTOS;
     }
 
+
+    @Override
+    public List<OrderlineDescriptionDTO> getOrderlineDescription() throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO,"");
+        List<OrderlineDescriptionDTO> orderlineDescriptionDTOS = new ArrayList<>();
+
+        String sql = "SELECT * FROM cupcake.orderline_description";
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+
+                    System.out.println("I was here");
+
+                     int orderId = rs.getInt("order_id");
+                     String bottom = rs.getString("bund");
+                     String topping = rs.getString("topping");
+                     int price = rs.getInt("stykpris");
+                     int amount = rs.getInt("antal");
+                     int totalSum = rs.getInt("sum");
+                     orderlineDescriptionDTOS.add(new OrderlineDescriptionDTO(orderId,bottom,topping,price,amount,totalSum));
+                }
+            } catch (SQLException throwables) {
+                throw new DatabaseException("Kunne ikke få alle ordrer fra database");
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException("Kunne få forbindelse til databasen");
+        }
+        return orderlineDescriptionDTOS;
+    }
+
+    @Override
+    public List<OrderlineDescriptionDTO> descriptionOfOrder (int orderId) throws DatabaseException {
+
+        Logger.getLogger("web").log(Level.INFO,"");
+        List<OrderlineDescriptionDTO> descriptionOfOrder = new ArrayList<>();
+        String sql = "SELECT * FROM cupcake.orderline_description where order_id = " + orderId ;
+
+        try (Connection connection = connectionPool.getConnection()){
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+
+                    System.out.println("I was here");
+
+                    orderId = rs.getInt("order_id");
+                    String bottom = rs.getString("bund");
+                    String topping = rs.getString("topping");
+                    int price = rs.getInt("stykpris");
+                    int amount = rs.getInt("antal");
+                    int totalSum = rs.getInt("sum");
+                    descriptionOfOrder.add(new OrderlineDescriptionDTO(orderId,bottom,topping,price,amount,totalSum));
+                }
+            } catch (SQLException throwables) {
+                throw new DatabaseException("Kunne ikke få alle ordrer fra database");
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DatabaseException("Kunne få forbindelse til databasen");
+        }
+
+
+
+        return descriptionOfOrder;
+
+    }
+
     @Override
     public Customer newCreditCustomer(Customer customer) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO,"");
@@ -129,4 +201,8 @@ public class AdminMapper implements IAdminMapper
         }
         return customer;
     }
+
+
+
+
 }
