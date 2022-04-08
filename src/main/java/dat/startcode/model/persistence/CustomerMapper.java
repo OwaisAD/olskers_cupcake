@@ -1,5 +1,6 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
@@ -220,5 +221,46 @@ public class CustomerMapper implements ICustomerMapper
         return topping;
     }
 
+    @Override
+    public List<OrderlineDescriptionDTO> getCustermersOrders(String email) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        List<OrderlineDescriptionDTO> customerOrders = new ArrayList<>();
+
+        String sql = "SELECT email, order_id, l.quantity as antal, b.name as bname, t.name as tname, (b.price + t.price) AS stykpris\n" +
+                "from user\n" +
+                "inner join ordered as o\n" +
+                "using (user_id)\n" +
+                "inner join orderline as l\n" +
+                "using (order_id)\n" +
+                "inner join bottom as b\n" +
+                "using (bottom_id)\n" +
+                "inner join topping as t\n" +
+                "using (topping_id)\n" +
+                "where email = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+
+                    int orderId = rs.getInt("order_id");
+                    int antal = rs.getInt("antal");
+                    String bname = rs.getString("bname");
+                    String tname = rs.getString("tname");
+                    int price = rs.getInt("stykpris");
+
+                    customerOrders.add(new OrderlineDescriptionDTO(orderId, bname, tname, price, antal, (antal * price)));
+                }
+            }
+        }
+        catch (Exception ex) {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+
+        }
+
+        return customerOrders;
+    }
 
 }
