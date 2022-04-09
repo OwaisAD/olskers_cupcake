@@ -13,6 +13,7 @@
     </jsp:attribute>
 
     <jsp:body>
+
         <h3>Her listen over alle kunders ordrer</h3>
         <table class="table table-striped">
             <thead>
@@ -25,51 +26,80 @@
             </thead>
             <tbody>
 
+            <!-- Kan bruges til at holde ordre Id-->
+            <c:set var="index" value="0"></c:set>
+
             <c:forEach var="order" items="${sessionScope.orderlist}">
                 <tr>
                     <td>${order.created}</td>
                     <td>${order.email}</td>
-                    <td>${order.orderId}</td>
+                    <td ${index=index+1}>${order.orderId}</td>
                     <td>${order.totalSum}</td>
+
+                    <!--  Nedenstående viser alle ordrerlinjer kan ikke sortere  -->
                     <td> </div>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Se ordreindhold!
-                        </button>
+                        <form method="post">
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ordre indhold</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
 
-                                        <table class="table table-striped">
-                                            <thead>
+                            <!-- Button trigger modal -->
+                            <button formaction="OrderDescription" name="orderId" value="${order.orderId}"
+                                    class="btn btn-primary">
+                                Se ordreindhold!
 
-                                            <tr>
-                                                <th>Tid bestilt</th>
-                                                <th>Email</th>
-                                                <th>Order ID</th>
-                                                <th>Saldo sum</th>
-                                            </tr>
+                            </button>
 
-                                            </thead>
+                        </form>
 
-                                        </table>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
                     </td>
+
+
                 </tr>
             </c:forEach>
+
+            <!-- Modal -->
+            <c:if test="${requestScope.orderlineDescriptionDTO != null}">
+
+                <table class="table table-striped">
+                    <thead>
+
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Bund</th>
+                        <th>Topping</th>
+                        <th>Stykpris</th>
+                        <th>Antal</th>
+                        <th>Saldo sum</th>
+                    </tr>
+
+
+                    </thead>
+                    <tbody>
+
+
+                    <c:forEach var="orderline"
+                               items="${requestScope.orderlineDescriptionDTO}">
+
+                        <tr>
+                            <td>${orderline.orderId}</td>
+                            <td>${orderline.bottom}</td>
+                            <td>${orderline.topping}</td>
+                            <td>${orderline.price}</td>
+                            <td>${orderline.amount}</td>
+                            <td>${orderline.totalSum}</td>
+                        </tr>
+
+                    </c:forEach>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </c:if>
+
+
 
             </tbody>
         </table>

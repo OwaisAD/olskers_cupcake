@@ -1,5 +1,6 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
@@ -16,5 +17,6 @@ public interface ICustomerMapper
     public Bottom getBottomById(int bottomId) throws DatabaseException;
     public List<Topping> getAllToppings() throws DatabaseException;
     public Topping getToppingById(int toppingId) throws DatabaseException;
+    public List<OrderlineDescriptionDTO> getCustermersOrders(String email) throws DatabaseException;
 
 }

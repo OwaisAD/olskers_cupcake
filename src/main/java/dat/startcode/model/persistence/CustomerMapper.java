@@ -1,5 +1,6 @@
 package dat.startcode.model.persistence;
 
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
@@ -220,5 +221,46 @@ public class CustomerMapper implements ICustomerMapper
         return topping;
     }
 
+    @Override
+    public List<OrderlineDescriptionDTO> getCustermersOrders(String email) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        List<OrderlineDescriptionDTO> customerOrders = new ArrayList<>();
+
+        String sql = "SELECT email, order_id, l.quantity as antal, b.name as bname, t.name as tname, (b.price + t.price) AS stykpris " +
+                "from user " +
+                "inner join ordered as o " +
+                "using (user_id) " +
+                "inner join orderline as l " +
+                "using (order_id) " +
+                "inner join bottom as b " +
+                "using (bottom_id) " +
+                "inner join topping as t " +
+                "using (topping_id) " +
+                "where email = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+
+                    int orderId = rs.getInt("order_id");
+                    int antal = rs.getInt("antal");
+                    String bname = rs.getString("bname");
+                    String tname = rs.getString("tname");
+                    int price = rs.getInt("stykpris");
+
+                    customerOrders.add(new OrderlineDescriptionDTO(orderId, bname, tname, price, antal, (antal * price)));
+                }
+            }
+        }
+        catch (Exception ex) {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+
+        }
+
+        return customerOrders;
+    }
 
 }
