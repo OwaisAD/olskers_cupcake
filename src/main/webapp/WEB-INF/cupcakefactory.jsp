@@ -25,14 +25,14 @@
                 <label for="bottoms">Vælg en bund:</label>
                    <select name="bottoms" id="bottoms">
                         <c:forEach items="${applicationScope.bottomlist}" var="bottoms">
-                            <option value="${bottoms.bottomId}">${bottoms.name}</option>
+                            <option value="${bottoms.bottomId}">${bottoms.name} (${bottoms.price},-)</option>
                         </c:forEach>
                     </select>
                     <br><br>
                     <label for="toppings">Vælg en topping:</label>
                     <select name="toppings" id="toppings">
                         <c:forEach items="${applicationScope.toppinglist}" var="toppings">
-                            <option value="${toppings.toppingId}">${toppings.name}</option>
+                            <option value="${toppings.toppingId}">${toppings.name} (${toppings.price},-)</option>
                         </c:forEach>
                     </select>
             </div>
@@ -82,9 +82,12 @@
                         </c:otherwise>
                      </c:choose>
                         <hr>
+                        <p>Ledig kredit: ${customer.getCredit()},-</p>
+                        <p>Rest beløb: ${customer.getCredit()-sessionScope.pricetotal},-</p>
+                        <hr>
                         <p>Sidst valgte cupcake:</p>
-                        <p>Bund: ${cupcake.getBottom().getName()} (${cupcake.getBottom().getPrice()} kr)</p>
-                        <p>Topping: ${cupcake.getTopping().getName()} (${cupcake.getTopping().getPrice()} kr)</p>
+                        <p>Bund: ${cupcake.getBottom().getName()}</p>
+                        <p>Topping: ${cupcake.getTopping().getName()}</p>
                         <hr>
                 </c:when>
                     <c:otherwise>
@@ -93,8 +96,6 @@
                     </c:otherwise>
                 </c:choose>
 
-                <p>Ledig kredit: ${customer.getCredit()}</p>
-                <hr>
                 <button>Gå til kurv</button>
             </form>
         </div>
