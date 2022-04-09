@@ -47,7 +47,7 @@ public class AddToBasket extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
-        HttpSession session = request.getSession();
+        HttpSession session;
         int bottomId = Integer.parseInt(request.getParameter("bottoms"));
         int toppingId = Integer.parseInt(request.getParameter("toppings"));
         int currAmount = Integer.parseInt(request.getParameter("amount"));
@@ -73,21 +73,21 @@ public class AddToBasket extends HttpServlet
             //findes de allerede så tilføj antallet kun
             boolean existing = false;
             for (BasketListDTO listDTO : basketList) {
-                    if(listDTO.getBottom().getName().equals(basketListDTO.getBottom().getName()) && listDTO.getTopping().getName().equals(basketListDTO.getTopping().getName())) {
-                        listDTO.setAmount(listDTO.getAmount()+currAmount);
-                        existing = true;
-                    }
-                    if(existing) {
-                        break;
-                    }
+                if(listDTO.getBottom().getName().equals(basketListDTO.getBottom().getName()) && listDTO.getTopping().getName().equals(basketListDTO.getTopping().getName())) {
+                    listDTO.setAmount(listDTO.getAmount()+currAmount);
+                    existing = true;
+                }
+                if(existing) {
+                    break;
+                }
             }
             if(!existing) {
                 basketList.add(basketListDTO);
             }
 
             session.setAttribute("basketlist", basketList);
-            getServletContext().setAttribute("amount", amount);
-            getServletContext().setAttribute("pricetotal", pricetotal);
+            session.setAttribute("amount", amount);
+            session.setAttribute("pricetotal", pricetotal);
             session.setAttribute("cupcake", cupcake);
         }
         catch (DatabaseException e)

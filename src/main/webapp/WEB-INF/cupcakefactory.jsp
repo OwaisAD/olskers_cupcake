@@ -70,16 +70,32 @@
             <!--Pris i alt: -->
             <!--Kredit tilbage-->
             <form action="openbasket" method="post">
-                <p>Prisen for valgt cupcake: ${cupcake.getPrice()},-</p>
-                <p>Pris i alt for ${applicationScope.amount} cupcakes: ${applicationScope.pricetotal},-</p>
-                <hr>
-                <p>Sidst valgte cupcake:</p>
-                <p>Bund: ${cupcake.getBottom().getName()} (${cupcake.getBottom().getPrice()} kr)</p>
-                <p>Topping: ${cupcake.getTopping().getName()} (${cupcake.getTopping().getPrice()} kr)</p>
-                <hr>
+                <c:choose>
+                    <c:when test="${cupcake.getBottom().getName() != null}">
+                        <p>Prisen for valgt cupcake: ${cupcake.getPrice()},-</p>
+                     <c:choose>
+                         <c:when test="${sessionScope.amount > 1}">
+                        <p>Pris i alt for ${sessionScope.amount} cupcakes: ${sessionScope.pricetotal},-</p>
+                         </c:when>
+                        <c:otherwise>
+                            <p>Pris i alt for ${sessionScope.amount} cupcake: ${sessionScope.pricetotal},-</p>
+                        </c:otherwise>
+                     </c:choose>
+                        <hr>
+                        <p>Sidst valgte cupcake:</p>
+                        <p>Bund: ${cupcake.getBottom().getName()} (${cupcake.getBottom().getPrice()} kr)</p>
+                        <p>Topping: ${cupcake.getTopping().getName()} (${cupcake.getTopping().getPrice()} kr)</p>
+                        <hr>
+                </c:when>
+                    <c:otherwise>
+                        <p>Ingen cupcakes i din kurv endnu.</p>
+                        <hr>
+                    </c:otherwise>
+                </c:choose>
+
                 <p>Ledig kredit: ${customer.getCredit()}</p>
                 <hr>
-                <input type="submit" value="Gå til kurv">
+                <button>Gå til kurv</button>
             </form>
         </div>
 

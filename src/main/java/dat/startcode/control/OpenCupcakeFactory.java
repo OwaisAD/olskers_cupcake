@@ -1,8 +1,6 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
-import dat.startcode.model.dtos.BasketListDTO;
-import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 
 import javax.servlet.ServletException;
@@ -12,12 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-@WebServlet(name = "openbasket", value = "/openbasket" )
-public class OpenBasket extends HttpServlet
+@WebServlet(name = "opencupcakefactory", urlPatterns = {"/opencupcakefactory"} )
+public class OpenCupcakeFactory extends HttpServlet
 {
     private ConnectionPool connectionPool;
 
@@ -36,20 +31,10 @@ public class OpenBasket extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-
         response.setContentType("text/html");
         HttpSession session = request.getSession();
 
-        List<BasketListDTO> updatedList = (List<BasketListDTO>) session.getAttribute("basketlist");
-
-        int totalPriceUpdated = 0;
-
-        for (BasketListDTO i : updatedList) {
-            totalPriceUpdated += (i.getBottom().getPrice() + i.getTopping().getPrice())*i.getAmount();
-        }
-
-        session.setAttribute("totalbasketlistprice", totalPriceUpdated);
-        request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
     }
 
     public void destroy()

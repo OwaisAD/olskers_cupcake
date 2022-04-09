@@ -98,7 +98,7 @@
 
                         <form action="createuser" method="post">
                             <label for="emailny">Email: </label> <br>
-                            <input type="email" id="emailny" name="emailny"> <br>
+                            <input type="email" id="emailny" name="emailny" required> <br>
                             <label for="passwordny">Kodeord: </label> <br>
                             <input type="password" id="passwordny" name="passwordny" minlength="4" required> <br>
                             <label for="passwordRepeated">Gentag kodeord: </label> <br>
