@@ -48,21 +48,25 @@
 
                 <div style="background-color: white; width: 400px; height: 400px;">
                     <p>Pris I alt: ${sessionScope.totalbasketlistprice},-</p>
+                    <hr>
+                    <p>Dit nuværende kredit er: ${customer.getCredit()},-</p>
+                    <hr>
+                    <c:choose>
+                        <c:when test="${customer.getCredit() >= sessionScope.totalbasketlistprice}">
+                            <button>Opret ordre</button>
+                        </c:when>
+                        <c:otherwise>
+                            <p>Du har ikke nok kredit. Kontakt os for at få kredit eller fjern nogle cupcakes.</p>
+                        </c:otherwise>
+                    </c:choose>
 
-                    <button>Opret ordre</button>
+
                 </div>
 
             </c:otherwise>
         </c:choose>
 
-        <c:choose>
-        <c:when test="${!(customer.getCredit() < sessionScope.pricetotal)}">
-            <p>Dit nuværende kredit er: ,-</p>
-        </c:when>
-        <c:otherwise>
-            <p>Du har ikke nok kredit. Kontakt os for at få kredit.</p>
-        </c:otherwise>
-        </c:choose>
+
 
         <form action="opencupcakefactory">
             <button>Tilføj cupcakes!</button>
