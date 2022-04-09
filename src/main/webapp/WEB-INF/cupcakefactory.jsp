@@ -83,7 +83,6 @@
                      </c:choose>
                         <hr>
                         <p>Ledig kredit: ${customer.getCredit()},-</p>
-                        <p>Rest beløb: ${customer.getCredit()-sessionScope.pricetotal},-</p>
                         <hr>
                         <p>Sidst valgte cupcake:</p>
                         <p>Bund: ${cupcake.getBottom().getName()}</p>

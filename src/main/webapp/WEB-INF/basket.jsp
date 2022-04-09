@@ -56,7 +56,7 @@
                             <button>Opret ordre</button>
                         </c:when>
                         <c:otherwise>
-                            <p>Du har ikke nok kredit. Kontakt os for at få kredit eller fjern nogle cupcakes.</p>
+                            <p>Du har ikke nok kredit. Du har oversteget med ${Math.abs(customer.getCredit()-sessionScope.totalbasketlistprice)} kr. Kontakt os for at få kredit eller fjern nogle cupcakes.</p>
                         </c:otherwise>
                     </c:choose>
 
