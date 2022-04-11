@@ -42,13 +42,16 @@ public class OpenBasket extends HttpServlet
 
         List<BasketListDTO> updatedList = (List<BasketListDTO>) session.getAttribute("basketlist");
 
+        if(!(updatedList == null)) {
         int totalPriceUpdated = 0;
 
         for (BasketListDTO i : updatedList) {
             totalPriceUpdated += (i.getBottom().getPrice() + i.getTopping().getPrice())*i.getAmount();
         }
+            session.setAttribute("totalbasketlistprice", totalPriceUpdated);
 
-        session.setAttribute("totalbasketlistprice", totalPriceUpdated);
+        }
+
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
     }
 

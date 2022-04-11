@@ -10,7 +10,7 @@
 
 
         <c:choose>
-            <c:when test="${sessionScope.basketlist.size() == 0}">
+            <c:when test="${sessionScope.basketlist.size() == 0 || sessionScope.basketlist == null}">
                 <h1>Din indkøbskurv er tom</h1>
             </c:when>
             <c:otherwise>
@@ -69,7 +69,7 @@
 
 
         <form action="opencupcakefactory">
-            <button>Tilføj cupcakes!</button>
+            <button class="btn btn-primary">Tilføj cupcakes!</button>
         </form>
 
     </jsp:body>
