@@ -11,52 +11,59 @@
 
     <jsp:body>
 
-        <h2>Bestil lige præcis den cupcake du helst vil ha'!</h2>
+        <h2 class="text-center">Bestil lige præcis den cupcake du helst vil ha'!</h2>
 
-<%--        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-        </c:if>--%>
+        <%--        <c:if test="${sessionScope.user != null}">
+                    <p>You are logged in with the role of "${sessionScope.user.role}".</p>
+                </c:if>--%>
 
-        <div class="row">
-            <div class="col-md-7">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/forside_billeder/cupcake1.jpg" class="d-block w-100" alt="...">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="images/forside_billeder/cupcake1.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/forside_billeder/cupcake3.jpg" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/forside_billeder/cupcake2.jpg" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <div class="carousel-item">
-                    <img src="images/forside_billeder/cupcake3.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="images/forside_billeder/cupcake2.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
             </div>
         </div>
 
         <!-- Button trigger modal -->
+        <div class="d-flex justify-content-center" style="padding-top: 25px; padding-bottom: 25px;">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Start din rejse!
         </button>
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Du kan logge ind her</h5>
@@ -74,12 +81,13 @@
                             <input type="password" id="password" name="password" minlength="4" required/>
                             <br>
                             <br>
-                            <input type="submit"  value="Log ind"/>
+                            <input type="submit" value="Log ind"/>
                             <br>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2" aria-label="Close" data-dismiss="#exampleModal">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal2"
+                                aria-label="Close" data-dismiss="#exampleModal">
                             Ikke medlem endnu? Klik her.
                         </button>
                     </div>
@@ -88,7 +96,7 @@
         </div>
 
         <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Opret login</h5>
@@ -102,7 +110,8 @@
                             <label for="passwordny">Kodeord: </label> <br>
                             <input type="password" id="passwordny" name="passwordny" minlength="4" required> <br>
                             <label for="passwordRepeated">Gentag kodeord: </label> <br>
-                            <input type="password" id="passwordRepeated" name="passwordRepeated" minlength="4" required> <br>
+                            <input type="password" id="passwordRepeated" name="passwordRepeated" minlength="4" required>
+                            <br>
                             <input type="submit" value="Bliv medlem" formaction="createuser">
                         </form>
                     </div>
