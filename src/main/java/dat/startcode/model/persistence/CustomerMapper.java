@@ -55,7 +55,7 @@ public class CustomerMapper implements ICustomerMapper
         }
         catch (SQLException ex)
         {
-            throw new DatabaseException(ex, "Kunne ikke indsætte låner i databasen");
+            throw new DatabaseException(ex, "Denne email er allerede taget i brug.");
         }
         return customer;
     }
@@ -89,9 +89,121 @@ public class CustomerMapper implements ICustomerMapper
         return customer;
     }
 
+
     @Override
-    public Order placeOrder(Cupcake cupcake, int amount) throws DatabaseException {
-        return null;
+    public Customer getCustomerByEmail(String email) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        Customer customer = null;
+        String sql = "SELECT * FROM user WHERE email = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    int userId = rs.getInt("user_id");
+                    int credit = rs.getInt("credit");
+
+                    customer = new Customer(userId, email, credit);
+                } else {
+                    throw new DatabaseException("Customer med email = " + email + " findes ikke");
+                }
+            }
+        } catch (Exception ex)
+        {
+            throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
+        }
+        return customer;
+    }
+
+    @Override
+    public Order createOrder(Order order) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        boolean result = false;
+        int newId = 0;
+        Timestamp timestamp = null;
+        String sql = "insert into ordered (user_id, isPayed) values (?,?)";
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
+            {
+                ps.setInt(1, order.getUserId());
+                ps.setBoolean(2, order.isPayed());
+                int rowsAffected = ps.executeUpdate();
+                if (rowsAffected == 1)
+                {
+                    result = true;
+                } else
+                {
+                    throw new DatabaseException("Order med kunde id = " + order.getUserId() + " kunne ikke oprettes i databasen");
+                }
+                ResultSet idResultset = ps.getGeneratedKeys();
+                if (idResultset.next())
+                {
+                    newId = idResultset.getInt(1);
+                    order.setOrderId(newId);
+
+                } else
+                {
+                    order = null;
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Kunne ikke indsætte ordre i databasen");
+        }
+        return order;
+    }
+
+    @Override
+    public Orderline createOrderline(Orderline orderline) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        boolean result = false;
+        int newId = 0;
+
+        String sql = "INSERT INTO orderline (order_id, quantity, totalprice, bottom_id, topping_id) " +
+                "values (?,?,?,?,?)";
+
+        try (Connection connection = connectionPool.getConnection())
+        {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
+            {
+                ps.setInt(1, orderline.getOrderId());
+                ps.setInt(2, orderline.getQuantity());
+                ps.setInt(3, orderline.getTotalprice());
+                ps.setInt(4, orderline.getBottomId());
+                ps.setInt(5, orderline.getToppingId());
+                System.out.println("this is reached");
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("this is reached");
+                if (rowsAffected == 1)
+                {
+                    result = true;
+                } else
+                {
+                    throw new DatabaseException("Ordrelinje med kunde ordreid = " + orderline.getOrderId() + " kunne ikke oprettes i databasen");
+                }
+                ResultSet idResultset = ps.getGeneratedKeys();
+                if (idResultset.next())
+                {
+                    newId = idResultset.getInt(1);
+                    orderline.setOrderlineId(newId);
+
+                } else
+                {
+                    orderline = null;
+                }
+            }
+        }
+        catch (SQLException ex)
+        {
+            throw new DatabaseException(ex, "Kunne ikke indsætte ordre i databasen");
+        }
+        return orderline;
     }
 
     @Override
