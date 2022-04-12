@@ -14,8 +14,6 @@
 
     <jsp:body>
 
-        <h1>Profil</h1>
-
         <p>Dine tidligere ordre</p>
 
         <h3>Her er listen over alle dine registrerede ordrer</h3>
@@ -46,6 +44,7 @@
 
         </table>
 
+        <button class="btn btn-primary">Gå til factory!</button>
 
     </jsp:body>
 

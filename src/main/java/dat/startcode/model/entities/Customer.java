@@ -28,6 +28,12 @@ public class Customer {
         this.credit = credit;
     }
 
+    public Customer(int userId, String email, int credit) {
+        this.userId = userId;
+        this.email = email;
+        this.credit = credit;
+    }
+
     public void setUserId(int userId) {
         this.userId = userId;
     }

@@ -4,11 +4,7 @@
 <%@page errorPage="error.jsp" isErrorPage="false" %>
 
 <t:pagetemplate>
-
-
     <jsp:body>
-
-
         <c:choose>
             <c:when test="${sessionScope.basketlist.size() == 0 || sessionScope.basketlist == null}">
                 <h1>Din indkøbskurv er tom</h1>
@@ -30,16 +26,19 @@
                     <c:forEach var="cupcake" items="${sessionScope.basketlist}">
                         <form action="updateinbasket" method="post">
                             <tr>
-                                <td>Cupcake med ${cupcake.bottom.getName()} bund og ${cupcake.topping.getName()} topping</td>
+                                <td>Cupcake med ${cupcake.bottom.getName()} bund og ${cupcake.topping.getName()}
+                                    topping
+                                </td>
                                 <td>Antal: ${cupcake.amount}</td>
                                 <td>
-                                    <input type="number" id="newamount" name="newamount" min="0" max="250" value="${cupcake.amount}">
+                                    <input type="number" id="newamount" name="newamount" min="0" max="250"
+                                           value="${cupcake.amount}">
                                     <input type="submit" value="Ændre">
 
                                 </td>
-                                    <input hidden name="bottomname" value="${cupcake.bottom.getName()}">
-                                    <input hidden name="toppingname" value="${cupcake.topping.getName()}">
-                                </tr>
+                                <input hidden name="bottomname" value="${cupcake.bottom.getName()}">
+                                <input hidden name="toppingname" value="${cupcake.topping.getName()}">
+                            </tr>
 
                         </form>
                     </c:forEach>
@@ -53,20 +52,20 @@
                     <hr>
                     <c:choose>
                         <c:when test="${customer.getCredit() >= sessionScope.totalbasketlistprice}">
-                            <button>Opret ordre</button>
+                            <form action="createorder" method="post">
+                                <button>Opret ordre</button>
+                            </form>
+
                         </c:when>
                         <c:otherwise>
-                            <p>Du har ikke nok kredit. Du har oversteget med ${Math.abs(customer.getCredit()-sessionScope.totalbasketlistprice)} kr. Kontakt os for at få kredit eller fjern nogle cupcakes.</p>
+                            <p>Du har ikke nok kredit. Du har oversteget
+                                med ${Math.abs(customer.getCredit()-sessionScope.totalbasketlistprice)} kr. Kontakt os
+                                for at få kredit eller fjern nogle cupcakes.</p>
                         </c:otherwise>
                     </c:choose>
-
-
                 </div>
-
             </c:otherwise>
         </c:choose>
-
-
 
         <form action="opencupcakefactory">
             <button class="btn btn-primary">Tilføj cupcakes!</button>
