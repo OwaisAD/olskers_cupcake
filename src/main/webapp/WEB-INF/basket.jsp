@@ -52,7 +52,7 @@
                     <hr>
                     <c:choose>
                         <c:when test="${customer.getCredit() >= sessionScope.totalbasketlistprice}">
-                            <form action="createorder" method="post">
+                            <form action="createorder" method="get">
                                 <button>Opret ordre</button>
                             </form>
 

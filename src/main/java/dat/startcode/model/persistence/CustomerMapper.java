@@ -262,7 +262,7 @@ public class CustomerMapper implements ICustomerMapper
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
 
-                    bottom = new Bottom(name, price);
+                    bottom = new Bottom(bottomId, name, price);
                 } else {
                     throw new DatabaseException("Bottom med bottomId = " + bottomId + " findes ikke");
                 }
@@ -316,12 +316,11 @@ public class CustomerMapper implements ICustomerMapper
                 ps.setInt(1, toppingId);
                 ResultSet rs = ps.executeQuery();
 
-
                 if (rs.next()) {
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
 
-                    topping = new Topping(name, price);
+                    topping = new Topping(toppingId, name, price);
                 } else {
                     throw new DatabaseException("Topping med toppingId = " + toppingId + " findes ikke");
                 }
@@ -365,6 +364,7 @@ public class CustomerMapper implements ICustomerMapper
 
                     customerOrders.add(new OrderlineDescriptionDTO(orderId, bname, tname, price, antal, (antal * price)));
                 }
+
             }
         }
         catch (Exception ex) {
@@ -375,4 +375,24 @@ public class CustomerMapper implements ICustomerMapper
         return customerOrders;
     }
 
+
+    @Override
+    public Customer updateCustomerBalance(Customer customer, int totalPrice) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO,"");
+
+        String sql = "UPDATE user SET credit = credit - ? WHERE email = ?";
+
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)){
+                ps.setInt(1,totalPrice);
+                ps.setString(2,customer.getEmail());
+                ps.executeUpdate();
+            }
+        }catch (SQLException ex) {
+            throw new DatabaseException("Kunne ikke oprette ordre til konto: " + customer.getEmail());
+        }
+
+        return customer;
+    }
 }

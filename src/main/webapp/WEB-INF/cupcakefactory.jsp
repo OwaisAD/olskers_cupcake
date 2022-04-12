@@ -69,7 +69,7 @@
             <!--Pris pr cupcakes-->
             <!--Pris i alt: -->
             <!--Kredit tilbage-->
-            <form action="openbasket" method="post">
+            <form action="openbasket">
                 <c:choose>
                     <c:when test="${cupcake.getBottom().getName() != null}">
                         <p>Prisen for valgt cupcake: ${cupcake.getPrice()},-</p>

@@ -24,4 +24,6 @@ public interface ICustomerMapper
     public Topping getToppingById(int toppingId) throws DatabaseException;
     public List<OrderlineDescriptionDTO> getCustermersOrders(String email) throws DatabaseException;
 
+    public Customer updateCustomerBalance(Customer customer, int totalPrice) throws DatabaseException;
+
 }

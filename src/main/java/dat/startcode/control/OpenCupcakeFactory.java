@@ -34,6 +34,7 @@ public class OpenCupcakeFactory extends HttpServlet
         response.setContentType("text/html");
         HttpSession session = request.getSession();
 
+
         request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
     }
 

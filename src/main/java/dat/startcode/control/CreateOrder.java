@@ -2,6 +2,7 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.dtos.BasketListDTO;
+import dat.startcode.model.entities.Cupcake;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
 import dat.startcode.model.entities.Orderline;
@@ -48,10 +49,17 @@ public class CreateOrder extends HttpServlet
 
         // get the list from session scope
         List<BasketListDTO> updatedList = (List<BasketListDTO>) session.getAttribute("basketlist");
+        System.out.println(updatedList);
         //get the customer by email
         String email = (String) session.getAttribute("email");
 
         Orderline orderline = null;
+
+        int totalFinPrice = (int) session.getAttribute("totalbasketlistprice");
+
+        // used to clear
+        Cupcake cupcake = (Cupcake) session.getAttribute("cupcake");
+
         try
         {
             session = request.getSession();
@@ -69,20 +77,28 @@ public class CreateOrder extends HttpServlet
             for (BasketListDTO i : updatedList) {
                 int quantity = i.getAmount();
                 int totalPrice = (i.getBottom().getPrice()+i.getTopping().getPrice())*quantity;
-                int bottomId = (i.getBottom().getBottomId())+1;
-                int toppingId = (i.getTopping().getToppingId())+1;
+                int bottomId = (i.getBottom().getBottomId());
+                int toppingId = (i.getTopping().getToppingId());
 
                 orderline = new Orderline(orderId, quantity, totalPrice, bottomId, toppingId);
                 System.out.println("This orderline will be inserted in the orderlines table: " + orderline);
                 customerMapper.createOrderline(orderline);
             }
 
-            updatedList.clear();
+            // updateCustomerBalance
+            Customer newCustomer = customerMapper.updateCustomerBalance(customer, totalFinPrice);
 
+            updatedList.clear();
             session.setAttribute("basketlist", updatedList);
+            session.setAttribute("customer", newCustomer);
+            cupcake = null;
+            session.setAttribute("cupcake", cupcake);
+            session.setAttribute("amount", 0);
+            session.setAttribute("pricetotal", 0);
+
 
             //send til profil side
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("ProfilNavigation").forward(request, response);
         }
         catch (DatabaseException e)
         {

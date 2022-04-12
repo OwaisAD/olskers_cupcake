@@ -53,20 +53,20 @@ public class AddToBasket extends HttpServlet
         int currAmount = Integer.parseInt(request.getParameter("amount"));
         amount += currAmount;
 
-
         try {
             session = request.getSession();
             CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
             Bottom bottom = customerMapper.getBottomById(bottomId);
+            System.out.println(bottom);
             Topping topping = customerMapper.getToppingById(toppingId);
+            System.out.println(topping);
             Cupcake cupcake = new Cupcake(bottom, topping);
-            String bottomName = bottom.getName();
-            String toppingName = topping.getName();
 
             pricetotal += cupcake.getPrice()*currAmount;
 
             BasketListDTO basketListDTO = new BasketListDTO(bottom, topping, currAmount);
+            System.out.println(basketListDTO);
 
             //iterer over vores liste
             // sammenlign bund og topping

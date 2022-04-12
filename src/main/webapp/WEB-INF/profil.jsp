@@ -44,7 +44,9 @@
 
         </table>
 
-        <button class="btn btn-primary">Gå til factory!</button>
+        <form action="opencupcakefactory">
+            <button class="btn btn-primary">Gå til factory!</button>
+        </form>
 
     </jsp:body>
 
