@@ -56,7 +56,7 @@
                            href="${pageContext.request.contextPath}/ProfilNavigation">Profil</a>
                     </c:if>
                     <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/openbasket">KURVIKON</a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/openbasket"><i class="fa fa-shopping-basket fa-2x"></i></a>
                     </c:if>
 
                     <c:if test="${sessionScope.admin == null && sessionScope.customer == null}">
@@ -106,7 +106,7 @@
 
                     <c:if test="${sessionScope.customer != null || sessionScope.admin != null}">
                         <button formaction="logout">
-                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
+                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log ud</a>
                         </button>
                     </c:if>
                 </div>
