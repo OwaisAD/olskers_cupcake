@@ -29,7 +29,6 @@ public class ProfilNavigation extends HttpServlet {
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
         String email = (String) session.getAttribute("email");
-        System.out.println(email);
 
         try {
             List<OrderlineDescriptionDTO> list = customerMapper.getCustermersOrders(email);

@@ -348,7 +348,8 @@ public class CustomerMapper implements ICustomerMapper
                 "using (bottom_id) " +
                 "inner join topping as t " +
                 "using (topping_id) " +
-                "where email = ?";
+                "where email = ? " +
+                "order by order_id desc";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {

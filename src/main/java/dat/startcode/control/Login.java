@@ -85,8 +85,6 @@ public class Login extends HttpServlet
                 request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
             } else {
                 // Når admin logger ind
-
-
                 List<OrderlineDescriptionDTO> orderlineDescriptionDTOS = adminMapper.getOrderlineDescription();
                 List<OrderListDTO> orderListDTOS = adminMapper.getOrderList();
                 //int orderListLenght = orderListDTOS.size();

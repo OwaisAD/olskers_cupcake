@@ -2,6 +2,7 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.dtos.BasketListDTO;
+import dat.startcode.model.dtos.OrderlineDescriptionDTO;
 import dat.startcode.model.entities.Cupcake;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
@@ -59,6 +60,7 @@ public class CreateOrder extends HttpServlet
 
         // used to clear
         Cupcake cupcake = (Cupcake) session.getAttribute("cupcake");
+        Customer newCustomer = null;
 
         try
         {
@@ -86,23 +88,26 @@ public class CreateOrder extends HttpServlet
             }
 
             // updateCustomerBalance
-            Customer newCustomer = customerMapper.updateCustomerBalance(customer, totalFinPrice);
+            newCustomer = customerMapper.updateCustomerBalance(customer, totalFinPrice);
 
             updatedList.clear();
             session.setAttribute("basketlist", updatedList);
             session.setAttribute("customer", newCustomer);
-            cupcake = null;
-            session.setAttribute("cupcake", cupcake);
-            session.setAttribute("amount", 0);
-            session.setAttribute("pricetotal", 0);
+            //cupcake = null;
+            //session.setAttribute("cupcake", cupcake);
 
+
+            List<OrderlineDescriptionDTO> list = customerMapper.getCustermersOrders(email);
+            session.setAttribute("list",list);
+            System.out.println(list.size());
 
             //send til profil side
-            request.getRequestDispatcher("ProfilNavigation").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/profil.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
+            System.out.println("Error message: " + e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }

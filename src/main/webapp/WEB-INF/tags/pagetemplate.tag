@@ -105,8 +105,8 @@
                     </c:if>
 
                     <c:if test="${sessionScope.customer != null || sessionScope.admin != null}">
-                        <button formaction="logout">
-                            <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log ud</a>
+                        <button class="btn btn-secondary"  type="submit" logout">
+                            <a id="logud" href="${pageContext.request.contextPath}/logout">Log ud</a>
                         </button>
                     </c:if>
                 </div>
@@ -123,8 +123,8 @@
 </div>
 
 
-<!-- Footer
-<footer class="text-center text-black" style="background-color: rgba(128, 128, 128, 5%);">
+<!-- Footer -->
+<footer class="text-center text-black" style="background-color: rgba(128, 128, 128, 5%); margin: 25px 50px;">
     <div class="container" style="padding: 20px 0px;">
 
         <div class="row">
@@ -161,7 +161,7 @@
         </div>
     </div>
 </footer>
--->
+
 
 
 
