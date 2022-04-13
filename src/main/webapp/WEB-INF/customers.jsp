@@ -18,14 +18,14 @@
             <thead>
             <tr>
                 <th>Email</th>
-                <th>Kunde's kredit</th>
+                <th style="text-align: right; padding-right: 20%">Kunde's kredit</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="kunder" items="${sessionScope.customerlist}">
                 <tr>
                     <td>${kunder.email}</td>
-                    <td>${kunder.credit}</td>
+                    <td style="text-align: right; padding-right: 20%">${kunder.credit}</td>
                     <td>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
