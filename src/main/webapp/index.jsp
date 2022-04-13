@@ -11,14 +11,14 @@
 
     <jsp:body>
 
-        <h2 class="text-center">Bestil lige præcis den cupcake du helst vil ha'!</h2>
+        <h2 class="text-center" style="padding: 25px 0px; font-weight: 400;">Bestil lige præcis den cupcake du helst vil ha'!</h2>
 
         <%--        <c:if test="${sessionScope.user != null}">
                     <p>You are logged in with the role of "${sessionScope.user.role}".</p>
                 </c:if>--%>
 
         <div class="row d-flex justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-7">
 
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -55,11 +55,13 @@
         </div>
 
         <!-- Button trigger modal -->
+        <c:if test="${customer == null && admin == null}">
         <div class="d-flex justify-content-center" style="padding-top: 25px; padding-bottom: 25px;">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Start din rejse!
         </button>
         </div>
+        </c:if>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -81,7 +83,9 @@
                             <input type="password" id="password" name="password" minlength="4" required/>
                             <br>
                             <br>
-                            <input type="submit" value="Log ind"/>
+                            <button type="submit" class="btn btn-primary">
+                                Log ind
+                            </button>
                             <br>
                         </form>
                     </div>
@@ -106,13 +110,16 @@
 
                         <form action="createuser" method="post">
                             <label for="emailny">Email: </label> <br>
-                            <input type="email" id="emailny" name="emailny" required> <br>
+                            <input type="email" id="emailny" name="emailny" required> <br> <br>
                             <label for="passwordny">Kodeord: </label> <br>
-                            <input type="password" id="passwordny" name="passwordny" minlength="4" required> <br>
+                            <input type="password" id="passwordny" name="passwordny" minlength="4" required> <br> <br>
                             <label for="passwordRepeated">Gentag kodeord: </label> <br>
                             <input type="password" id="passwordRepeated" name="passwordRepeated" minlength="4" required>
                             <br>
-                            <input type="submit" value="Bliv medlem" formaction="createuser">
+                            <br>
+                            <button type="submit" class="btn btn-primary" formaction="createuser">
+                                Bliv medlem
+                            </button>
                         </form>
                     </div>
                 </div>

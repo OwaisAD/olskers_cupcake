@@ -14,8 +14,6 @@
 
     <jsp:body>
 
-        <p>Dine tidligere ordre</p>
-
         <h3>Her er listen over alle dine registrerede ordrer</h3>
         <table class="table table-striped">
             <thead>
@@ -45,7 +43,7 @@
         </table>
 
         <form action="opencupcakefactory">
-            <button class="btn btn-primary">Gå til factory!</button>
+            <button class="btn btn-primary" style="margin-bottom: 25px;">Gå til factory!</button>
         </form>
 
     </jsp:body>

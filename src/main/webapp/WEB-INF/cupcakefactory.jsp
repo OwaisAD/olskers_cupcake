@@ -61,19 +61,24 @@
                             <option value="14">14</option>
                             <option value="15">15</option>
                         </select>
-                    </div>
 
-                    <input type="submit" value="Læg i kurv">
+
+                        <button type="submit">
+                            Læg i kurv
+                        </button>
+                    </div>
                 </form>
 
             </div>
 
             <!--dette er højre side på siden, altså der hvor man ser cupcakes pris og kredit tilbage-->
-            <div class="flex-items" style="background-color: white">
+            <form action="openbasket" method="post">
+            <div class="flex-items">
                 <!--Pris pr cupcakes-->
                 <!--Pris i alt: -->
                 <!--Kredit tilbage-->
-                <form action="openbasket" method="post">
+
+                <div style="background-color: white; padding-bottom: 20px;">
                     <c:choose>
                         <c:when test="${cupcake.getBottom().getName() != null}">
                             <p>Prisen for valgt cupcake: ${cupcake.getPrice()},-</p>
@@ -100,8 +105,10 @@
                     </c:choose>
 
                     <button>Gå til kurv</button>
-                </form>
+                </div>
+
             </div>
+            </form>
         </div>
 
     </jsp:body>

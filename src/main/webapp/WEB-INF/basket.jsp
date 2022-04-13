@@ -68,7 +68,7 @@
         </c:choose>
 
         <form action="opencupcakefactory">
-            <button class="btn btn-primary">Tilføj cupcakes!</button>
+            <button class="btn btn-primary" style="margin-top: 10px;">Tilføj cupcakes!</button>
         </form>
 
     </jsp:body>

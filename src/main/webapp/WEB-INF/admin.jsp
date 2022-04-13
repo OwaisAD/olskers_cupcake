@@ -22,6 +22,7 @@
                 <th>Email</th>
                 <th>Order ID</th>
                 <th>Saldo sum</th>
+                <th>Indhold</th>
             </tr>
             </thead>
             <tbody>
@@ -44,7 +45,7 @@
 
                             <!-- Button trigger modal -->
                             <button formaction="OrderDescription" name="orderId" value="${order.orderId}"
-                                    class="btn btn-primary">
+                                    class="btn btn-secondary">
                                 Se ordreindhold!
 
                             </button>

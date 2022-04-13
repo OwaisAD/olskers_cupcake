@@ -18,6 +18,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -38,12 +42,12 @@
                 <div class="navbar-nav">
                     <c:if test="${sessionScope.admin != null }">
                         <form action="AdminNavigation" method="get">
-                            <input type="submit" id="ordrer" name="handling" type="button" value="Ordrer">
-                            <input type="submit" id="kunder" name="handling" type="button" value="Kunder">
+                            <button class="btn btn-secondary" type="submit" id="ordrer" name="handling" value="Ordrer">Ordrer</button>
+                            <button class="btn btn-secondary" type="submit" id="kunder" name="handling" value="Kunder">Kunder</button>
                         </form>
                     </c:if>
                     <c:if test="${sessionScope.customer != null }">
-                        <p class="nav-item">${sessionScope.email}</p>
+                        <a class="nav-item nav-link">${sessionScope.email}</a>
                     </c:if>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Forside</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/omos.jsp">Om os</a>
@@ -68,7 +72,7 @@
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Du kan logge ind her</h5>
@@ -95,7 +99,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#modal2" aria-label="Close"
-                                                data-dismiss="#exampleModal">
+                                                data-dismiss="#exampleModal" style="margin-right: 25%;">
                                             Ikke medlem endnu? Klik her.
                                         </button>
                                     </div>
@@ -105,9 +109,11 @@
                     </c:if>
 
                     <c:if test="${sessionScope.customer != null || sessionScope.admin != null}">
-                        <button class="btn btn-secondary"  type="submit" logout">
-                            <a id="logud" href="${pageContext.request.contextPath}/logout">Log ud</a>
-                        </button>
+                        <a id="logud" href="${pageContext.request.contextPath}/logout">
+                            <button class="btn btn-secondary" type="submit">
+                                Log ud
+                            </button>
+                        </a>
                     </c:if>
                 </div>
             </div>
@@ -161,8 +167,6 @@
         </div>
     </div>
 </footer>
-
-
 
 
 <!-- Bootstrap Bundle with Popper -->

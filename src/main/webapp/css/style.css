@@ -1,5 +1,9 @@
 /* CSS stylesheet  for application */
 
+* {
+    font-family: 'Titillium Web';
+}
+
 table {
     border-collapse: collapse;
     border: 1px solid silver;
@@ -56,4 +60,30 @@ th, td {
     flex-basis: auto;
     align-self: auto;
     order: 0;
+}
+
+/*modals*/
+.modal {
+    text-align: center;
+}
+
+.modal-title {
+    width: 100%;
+    text-align: center;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.omos {
+    column-count: 2;
+}
+
+.blabla {
+    border-right: 1px solid black;
+}
+
+.omos-broedtekst {
+    padding: 0px 15px;
 }
