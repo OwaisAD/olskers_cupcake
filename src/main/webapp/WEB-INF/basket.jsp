@@ -8,10 +8,15 @@
         <c:choose>
             <c:when test="${sessionScope.basketlist.size() == 0 || sessionScope.basketlist == null}">
                 <h1>Din indkøbskurv er tom</h1>
+                <form action="opencupcakefactory">
+                    <button class="btn btn-primary" style="margin-top: 10px;">Tilføj cupcakes!</button>
+                </form>
             </c:when>
             <c:otherwise>
 
                 <h1>Din indkøbskurv</h1>
+
+                <div class="div-in-basket">
 
                 <table class="table table-striped">
                     <thead>
@@ -32,9 +37,8 @@
                                 <td>Antal: ${cupcake.amount}</td>
                                 <td>
                                     <input type="number" id="newamount" name="newamount" min="0" max="250"
-                                           value="${cupcake.amount}">
+                                           value="${cupcake.amount}" required>
                                     <input type="submit" value="Ændre">
-
                                 </td>
                                 <input hidden name="bottomname" value="${cupcake.bottom.getName()}">
                                 <input hidden name="toppingname" value="${cupcake.topping.getName()}">
@@ -45,7 +49,7 @@
                     </tbody>
                 </table>
 
-                <div style="background-color: white; width: 400px; height: 400px;">
+                <div class="right-side-box-basket">
                     <p>Pris I alt: ${sessionScope.totalbasketlistprice},-</p>
                     <hr>
                     <p>Dit nuværende kredit er: ${customer.getCredit()},-</p>
@@ -67,9 +71,14 @@
             </c:otherwise>
         </c:choose>
 
-        <form action="opencupcakefactory">
-            <button class="btn btn-primary" style="margin-top: 10px;">Tilføj cupcakes!</button>
-        </form>
+        </div>
+
+        <c:if test="${sessionScope.basketlist.size() > 0}">
+            <form action="opencupcakefactory">
+                <button class="btn btn-primary" style="margin-top: 10px; margin-bottom: 25px">Tilføj cupcakes!</button>
+            </form>
+        </c:if>
+
 
     </jsp:body>
 

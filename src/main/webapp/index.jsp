@@ -20,7 +20,7 @@
         <div class="row d-flex justify-content-center">
             <div class="col-md-7">
 
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div id="carouselExampleIndicators" class="carousel slide mb-5" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -56,7 +56,7 @@
 
         <!-- Button trigger modal -->
         <c:if test="${customer == null && admin == null}">
-        <div class="d-flex justify-content-center" style="padding-top: 25px; padding-bottom: 25px;">
+        <div class="d-flex justify-content-center" style="padding-bottom: 30px;">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Start din rejse!
         </button>

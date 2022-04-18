@@ -25,13 +25,13 @@
 </head>
 <body>
 
-<div>
+<div class="header-image-div">
     <a href="index.jsp">
         <img id="header-image" src="images/headercupcakeimage.png" alt="billeder af olskers cupcake">
     </a>
 </div>
 
-<header style="padding: 0px 15px;">
+<header style="padding: 0px 52px;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="padding: 5px;">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -64,10 +64,12 @@
                     </c:if>
 
                     <c:if test="${sessionScope.admin == null && sessionScope.customer == null}">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                            Log ind!
-                        </button>
+                        <c:if test="${requestScope.errormessage == null}">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">
+                                Log ind!
+                            </button>
+                        </c:if>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

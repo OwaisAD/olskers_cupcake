@@ -87,7 +87,7 @@ public class AdminMapper implements IAdminMapper
 
         List<OrderListDTO> orderListDTOS = new ArrayList<>();
 
-        String sql = "SELECT * FROM list_of_customers_orders";
+        String sql = "SELECT * FROM list_of_customers_orders ORDER BY order_id desc";
 
         try (Connection connection = connectionPool.getConnection()){
             try (PreparedStatement ps = connection.prepareStatement(sql)){
