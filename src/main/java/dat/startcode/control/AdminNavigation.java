@@ -9,7 +9,7 @@ import java.io.IOException;
 public class AdminNavigation extends HttpServlet {
 
     @Override
-    public void init() throws ServletException{
+    public void init() throws ServletException {
     }
 
     @Override
@@ -17,10 +17,10 @@ public class AdminNavigation extends HttpServlet {
         String handling = request.getParameter("handling");
         log(handling);
         if (handling.equals("Ordrer")) {
-            request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
         }
         if (handling.equals("Kunder")) {
-            request.getRequestDispatcher("WEB-INF/customers.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/customers.jsp").forward(request, response);
         }
     }
 

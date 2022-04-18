@@ -13,26 +13,22 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "updateinbasket", urlPatterns = {"/updateinbasket"} )
-public class UpdateInBasket extends HttpServlet
-{
+@WebServlet(name = "updateinbasket", urlPatterns = {"/updateinbasket"})
+public class UpdateInBasket extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
 
@@ -41,14 +37,13 @@ public class UpdateInBasket extends HttpServlet
         String bottomname = request.getParameter("bottomname");
         String toppingname = request.getParameter("toppingname");
 
-
         //change amount in list
 
         int getNewAmount = Integer.parseInt(request.getParameter("newamount"));
 
         for (BasketListDTO listDTO : updatedList) {
-            if(listDTO.getBottom().getName().equals(bottomname) && listDTO.getTopping().getName().equals(toppingname)) {
-                if(getNewAmount == 0) {
+            if (listDTO.getBottom().getName().equals(bottomname) && listDTO.getTopping().getName().equals(toppingname)) {
+                if (getNewAmount == 0) {
                     updatedList.remove(listDTO);
                 } else {
                     listDTO.setAmount(getNewAmount);
@@ -61,17 +56,15 @@ public class UpdateInBasket extends HttpServlet
         int totalPriceUpdated = 0;
 
         for (BasketListDTO i : updatedList) {
-            totalPriceUpdated += (i.getBottom().getPrice() + i.getTopping().getPrice())*i.getAmount();
+            totalPriceUpdated += (i.getBottom().getPrice() + i.getTopping().getPrice()) * i.getAmount();
         }
-
 
         session.setAttribute("totalbasketlistprice", totalPriceUpdated);
         session.setAttribute("basketlist", updatedList);
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

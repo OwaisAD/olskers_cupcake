@@ -13,10 +13,6 @@
 
         <h2 class="text-center" style="padding: 25px 0px; font-weight: 400;">Bestil lige præcis den cupcake du helst vil ha'!</h2>
 
-        <%--        <c:if test="${sessionScope.user != null}">
-                    <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-                </c:if>--%>
-
         <div class="row d-flex justify-content-center">
             <div class="col-md-7">
 
@@ -125,7 +121,6 @@
                 </div>
             </div>
         </div>
-
 
     </jsp:body>
 

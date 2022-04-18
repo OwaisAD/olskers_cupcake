@@ -34,7 +34,8 @@
 <header style="padding: 0px 52px;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="padding: 5px;">
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,8 +44,12 @@
                     <c:if test="${sessionScope.admin != null }">
                         <div class="position-absolute top-50 start-0 translate-middle" style="margin-left: 11.5%">
                             <form action="AdminNavigation" method="get">
-                                <button class="btn btn-secondary" type="submit" id="ordrer" name="handling" value="Ordrer">Ordrer</button>
-                                <button class="btn btn-secondary" type="submit" id="kunder" name="handling" value="Kunder">Kunder</button>
+                                <button class="btn btn-secondary" type="submit" id="ordrer" name="handling"
+                                        value="Ordrer">Ordrer
+                                </button>
+                                <button class="btn btn-secondary" type="submit" id="kunder" name="handling"
+                                        value="Kunder">Kunder
+                                </button>
                             </form>
                         </div>
                     </c:if>
@@ -62,7 +67,8 @@
                            href="${pageContext.request.contextPath}/ProfilNavigation">Profil</a>
                     </c:if>
                     <c:if test="${sessionScope.customer != null && sessionScope.admin == null}">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/openbasket"><i class="fa fa-shopping-basket fa-2x"></i></a>
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/openbasket"><i
+                                class="fa fa-shopping-basket fa-2x"></i></a>
                     </c:if>
 
                     <c:if test="${sessionScope.admin == null && sessionScope.customer == null}">
@@ -139,34 +145,34 @@
 
         <div class="row">
             <div class="col-sm">
-            <div>
-                <a href="mailto: olskers@cupcakes.com">Send os en email</a><br/>
-                <a href="tel: 70707070">Ring til os</a>
-            </div>
+                <div>
+                    <a href="mailto: olskers@cupcakes.com">Send os en email</a><br/>
+                    <a href="tel: 70707070">Ring til os</a>
+                </div>
             </div>
 
 
             <div class="col-sm">
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
-            ><i class="fa fa-instagram"></i
-            ></a>
+                <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
+                ><i class="fa fa-instagram"></i
+                ></a>
 
 
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
-            ><i class="fa fa-facebook"></i
-            ></a>
+                <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
+                ><i class="fa fa-facebook"></i
+                ></a>
 
 
-            <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
-            ><i class="fa fa-linkedin"></i
-            ></a>
-        </div>
+                <a class="btn btn-outline-dark btn-floating m-1" href="#!" role="button"
+                ><i class="fa fa-linkedin"></i
+                ></a>
+            </div>
 
             <div class="col-sm">
-            <div>
-                Peter Knudsens Vej<br/>
-                Cvr. 22334455
-            </div>
+                <div>
+                    Peter Knudsens Vej<br/>
+                    Cvr. 22334455
+                </div>
             </div>
         </div>
     </div>

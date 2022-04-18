@@ -10,12 +10,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerMapper implements ICustomerMapper
-{
+public class CustomerMapper implements ICustomerMapper {
     ConnectionPool connectionPool;
 
-    public CustomerMapper(ConnectionPool connectionPool)
-    {
+    public CustomerMapper(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
@@ -26,35 +24,27 @@ public class CustomerMapper implements ICustomerMapper
         boolean result = false;
         int newId = 0;
         String sql = "insert into user (email, password, credit, role) values (?,?,?,?)";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, customer.getEmail());
                 ps.setString(2, customer.getPassword());
                 ps.setInt(3, customer.getCredit());
                 ps.setString(4, customer.getRole());
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1)
-                {
+                if (rowsAffected == 1) {
                     result = true;
-                } else
-                {
+                } else {
                     throw new DatabaseException("Customer med email = " + customer.getEmail() + " kunne ikke oprettes i databasen");
                 }
                 ResultSet idResultset = ps.getGeneratedKeys();
-                if (idResultset.next())
-                {
+                if (idResultset.next()) {
                     newId = idResultset.getInt(1);
                     customer.setUserId(newId);
-                } else
-                {
+                } else {
                     customer = null;
                 }
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Denne email er allerede taget i brug.");
         }
         return customer;
@@ -63,27 +53,27 @@ public class CustomerMapper implements ICustomerMapper
 
     @Override
     public Customer login(String email, String password) throws DatabaseException {
-        Logger.getLogger("web").log(Level.INFO,"");
+        Logger.getLogger("web").log(Level.INFO, "");
 
         Customer customer;
 
         String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
 
-        try (Connection connection = connectionPool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
-                ps.setString(1,email);
-                ps.setString(2,password);
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     String role = rs.getString("role");
                     int credit = rs.getInt("credit");
-                    customer = new Customer(email,password,credit, role);
+                    customer = new Customer(email, password, credit, role);
                 } else {
                     throw new DatabaseException("Forkert brugernavn og/eller kodeord");
                 }
             }
         } catch (SQLException ex) {
-            throw new DatabaseException(ex,"Noget gik forkert");
+            throw new DatabaseException(ex, "Noget gik forkert");
         }
 
         return customer;
@@ -98,7 +88,7 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "SELECT * FROM user WHERE email = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
@@ -112,8 +102,7 @@ public class CustomerMapper implements ICustomerMapper
                     throw new DatabaseException("Customer med email = " + email + " findes ikke");
                 }
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
         }
         return customer;
@@ -126,34 +115,26 @@ public class CustomerMapper implements ICustomerMapper
         int newId = 0;
         Timestamp timestamp = null;
         String sql = "insert into ordered (user_id, isPayed) values (?,?)";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, order.getUserId());
                 ps.setBoolean(2, order.isPayed());
                 int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1)
-                {
+                if (rowsAffected == 1) {
                     result = true;
-                } else
-                {
+                } else {
                     throw new DatabaseException("Order med kunde id = " + order.getUserId() + " kunne ikke oprettes i databasen");
                 }
                 ResultSet idResultset = ps.getGeneratedKeys();
-                if (idResultset.next())
-                {
+                if (idResultset.next()) {
                     newId = idResultset.getInt(1);
                     order.setOrderId(newId);
 
-                } else
-                {
+                } else {
                     order = null;
                 }
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Kunne ikke indsætte ordre i databasen");
         }
         return order;
@@ -168,10 +149,8 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "INSERT INTO orderline (order_id, quantity, totalprice, bottom_id, topping_id) " +
                 "values (?,?,?,?,?)";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, orderline.getOrderId());
                 ps.setInt(2, orderline.getQuantity());
                 ps.setInt(3, orderline.getTotalprice());
@@ -180,27 +159,21 @@ public class CustomerMapper implements ICustomerMapper
                 System.out.println("this is reached");
                 int rowsAffected = ps.executeUpdate();
                 System.out.println("this is reached");
-                if (rowsAffected == 1)
-                {
+                if (rowsAffected == 1) {
                     result = true;
-                } else
-                {
+                } else {
                     throw new DatabaseException("Ordrelinje med kunde ordreid = " + orderline.getOrderId() + " kunne ikke oprettes i databasen");
                 }
                 ResultSet idResultset = ps.getGeneratedKeys();
-                if (idResultset.next())
-                {
+                if (idResultset.next()) {
                     newId = idResultset.getInt(1);
                     orderline.setOrderlineId(newId);
 
-                } else
-                {
+                } else {
                     orderline = null;
                 }
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new DatabaseException(ex, "Kunne ikke indsætte ordre i databasen");
         }
         return orderline;
@@ -224,11 +197,11 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "SELECT * FROM bottom";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ResultSet rs = ps.executeQuery();
 
-                while(rs.next()) {
+                while (rs.next()) {
                     int bottomId = rs.getInt("bottom_id");
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
@@ -238,8 +211,7 @@ public class CustomerMapper implements ICustomerMapper
                     //System.out.println(getAllBottomsList.size());
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
         }
         return getAllBottomsList;
@@ -253,7 +225,7 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "SELECT * FROM bottom WHERE bottom_id = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ps.setInt(1, bottomId);
                 ResultSet rs = ps.executeQuery();
@@ -267,8 +239,7 @@ public class CustomerMapper implements ICustomerMapper
                     throw new DatabaseException("Bottom med bottomId = " + bottomId + " findes ikke");
                 }
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
         }
         return bottom;
@@ -282,11 +253,11 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "SELECT * FROM topping";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ResultSet rs = ps.executeQuery();
 
-                while(rs.next()) {
+                while (rs.next()) {
                     int toppingId = rs.getInt("topping_id");
                     String name = rs.getString("name");
                     int price = rs.getInt("price");
@@ -296,8 +267,7 @@ public class CustomerMapper implements ICustomerMapper
                     //System.out.println(getAllBottomsList.size());
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
         }
         return getAllToppingsList;
@@ -311,7 +281,7 @@ public class CustomerMapper implements ICustomerMapper
         String sql = "SELECT * FROM topping WHERE topping_id = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ps.setInt(1, toppingId);
                 ResultSet rs = ps.executeQuery();
@@ -325,8 +295,7 @@ public class CustomerMapper implements ICustomerMapper
                     throw new DatabaseException("Topping med toppingId = " + toppingId + " findes ikke");
                 }
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
         }
         return topping;
@@ -367,8 +336,7 @@ public class CustomerMapper implements ICustomerMapper
                 }
 
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new DatabaseException(ex, "Fejl under indlæsning af bottom tabellen fra databasen.");
 
         }
@@ -379,18 +347,18 @@ public class CustomerMapper implements ICustomerMapper
 
     @Override
     public Customer updateCustomerBalance(Customer customer, int totalPrice) throws DatabaseException {
-        Logger.getLogger("web").log(Level.INFO,"");
+        Logger.getLogger("web").log(Level.INFO, "");
 
         String sql = "UPDATE user SET credit = credit - ? WHERE email = ?";
 
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)){
-                ps.setInt(1,totalPrice);
-                ps.setString(2,customer.getEmail());
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, totalPrice);
+                ps.setString(2, customer.getEmail());
                 ps.executeUpdate();
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new DatabaseException("Kunne ikke oprette ordre til konto: " + customer.getEmail());
         }
 

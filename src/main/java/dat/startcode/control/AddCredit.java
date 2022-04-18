@@ -19,26 +19,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "addcredit", urlPatterns = {"/addcredit"} )
-public class AddCredit extends HttpServlet
-{
+@WebServlet(name = "addcredit", urlPatterns = {"/addcredit"})
+public class AddCredit extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         AdminMapper adminMapper = new AdminMapper(connectionPool);
@@ -47,12 +43,12 @@ public class AddCredit extends HttpServlet
         int newCredit = Integer.parseInt(request.getParameter("amount"));
 
         try {
-            customer = new Customer(email,newCredit);
+            customer = new Customer(email, newCredit);
             customer = adminMapper.newCreditCustomer(customer);
             List<Customer> customerList = adminMapper.checkCustomerList();
-            session.setAttribute("customer",customer);
-            session.setAttribute("customerlist",customerList);
-            request.getRequestDispatcher("WEB-INF/customers.jsp").forward(request,response);
+            session.setAttribute("customer", customer);
+            session.setAttribute("customerlist", customerList);
+            request.getRequestDispatcher("WEB-INF/customers.jsp").forward(request, response);
         } catch (DatabaseException e) {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
@@ -60,8 +56,7 @@ public class AddCredit extends HttpServlet
         }
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

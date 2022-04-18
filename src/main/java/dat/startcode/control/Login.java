@@ -27,29 +27,24 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "login", urlPatterns = {"/login"} )
-public class Login extends HttpServlet
-{
+@WebServlet(name = "login", urlPatterns = {"/login"})
+public class Login extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
         List<AllOrderlinesDTO> aOLD = new ArrayList<>();
         AdminMapper adminMapper = new AdminMapper(connectionPool);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
-
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // adding empty user object to session scope
@@ -60,18 +55,17 @@ public class Login extends HttpServlet
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        log("email og password: "+email+" "+password);
+        log("email og password: " + email + " " + password);
 
         List<Bottom> bottomsList = null;
         List<Topping> toppingsList = null;
 
-        try
-        {
-            customer = customerMapper.login(email,password);
+        try {
+            customer = customerMapper.login(email, password);
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
 
-            log("##"+customer);
+            log("##" + customer);
 
             bottomsList = customerMapper.getAllBottoms();
             getServletContext().setAttribute("bottomlist", bottomsList);
@@ -79,7 +73,7 @@ public class Login extends HttpServlet
             toppingsList = customerMapper.getAllToppings();
             getServletContext().setAttribute("toppinglist", toppingsList);
 
-            session.setAttribute("email",customer.getEmail());
+            session.setAttribute("email", customer.getEmail());
             String role = customer.getRole();
             if (role.equals("Customer")) {
                 request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
@@ -87,28 +81,23 @@ public class Login extends HttpServlet
                 // Når admin logger ind
                 List<OrderlineDescriptionDTO> orderlineDescriptionDTOS = adminMapper.getOrderlineDescription();
                 List<OrderListDTO> orderListDTOS = adminMapper.getOrderList();
-                //int orderListLenght = orderListDTOS.size();
                 List<Customer> customerList = adminMapper.checkCustomerList();
-                admin = adminMapper.login(email,password);
-                session.setAttribute("orderlineDescription",orderlineDescriptionDTOS);
-                session.setAttribute("orderlist",orderListDTOS);
-                //session.setAttribute("orderListLenght",orderListLenght);
-                session.setAttribute("customerlist",customerList);
-                session.setAttribute("admin",admin);
-                request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
+                admin = adminMapper.login(email, password);
+                session.setAttribute("orderlineDescription", orderlineDescriptionDTOS);
+                session.setAttribute("orderlist", orderListDTOS);
+                session.setAttribute("customerlist", customerList);
+                session.setAttribute("admin", admin);
+                request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
             }
 
-        }
-        catch (DatabaseException e)
-        {
+        } catch (DatabaseException e) {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

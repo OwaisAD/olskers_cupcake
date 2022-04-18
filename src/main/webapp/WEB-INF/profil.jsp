@@ -17,26 +17,26 @@
         <h3>Her er listen over alle dine registrerede ordrer</h3>
         <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>Order id</th>
-                    <th>Antal</th>
-                    <th>Cupcake bund</th>
-                    <th>Cupcake topping</th>
-                    <th>Stykpris</th>
-                    <th>Total pris</th>
-                </tr>
+            <tr>
+                <th>Order id</th>
+                <th>Antal</th>
+                <th>Cupcake bund</th>
+                <th>Cupcake topping</th>
+                <th>Stykpris</th>
+                <th>Total pris</th>
+            </tr>
             </thead>
             <tbody>
-                <c:forEach var="linjer" items="${sessionScope.list}">
-                    <tr>
-                        <td>${linjer.orderId}</td>
-                        <td>${linjer.amount}</td>
-                        <td>${linjer.bottom}</td>
-                        <td>${linjer.topping}</td>
-                        <td>${linjer.price}</td>
-                        <td>${linjer.totalSum}</td>
-                    </tr>
-                </c:forEach>
+            <c:forEach var="linjer" items="${sessionScope.list}">
+                <tr>
+                    <td>${linjer.orderId}</td>
+                    <td>${linjer.amount}</td>
+                    <td>${linjer.bottom}</td>
+                    <td>${linjer.topping}</td>
+                    <td>${linjer.price}</td>
+                    <td>${linjer.totalSum}</td>
+                </tr>
+            </c:forEach>
             </tbody>
 
 

@@ -32,15 +32,13 @@ public class ProfilNavigation extends HttpServlet {
 
         try {
             List<OrderlineDescriptionDTO> list = customerMapper.getCustermersOrders(email);
-            session.setAttribute("list",list);
+            session.setAttribute("list", list);
             System.out.println(list.size());
-            request.getRequestDispatcher("WEB-INF/profil.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/profil.jsp").forward(request, response);
         } catch (DatabaseException e) {
             e.printStackTrace();
-            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request,response);
+            request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
-
-
     }
 
     @Override

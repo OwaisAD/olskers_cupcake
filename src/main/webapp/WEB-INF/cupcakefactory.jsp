@@ -37,7 +37,8 @@
                             <label for="toppings">Vælg en topping:</label>
                             <select class="styled-select" name="toppings" id="toppings">
                                 <c:forEach items="${applicationScope.toppinglist}" var="toppings">
-                                    <option value="${toppings.toppingId}">${toppings.name} (${toppings.price},-)</option>
+                                    <option value="${toppings.toppingId}">${toppings.name} (${toppings.price},-)
+                                    </option>
                                 </c:forEach>
                             </select>
                         </div>

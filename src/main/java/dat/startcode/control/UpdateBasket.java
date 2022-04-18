@@ -2,12 +2,7 @@ package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.dtos.BasketListDTO;
-import dat.startcode.model.entities.Bottom;
-import dat.startcode.model.entities.Cupcake;
-import dat.startcode.model.entities.Topping;
-import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.persistence.CustomerMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,31 +11,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-@WebServlet(name = "updatebasket", urlPatterns = {"/updatebasket"} )
-public class UpdateBasket extends HttpServlet
-{
+@WebServlet(name = "updatebasket", urlPatterns = {"/updatebasket"})
+public class UpdateBasket extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html");
         HttpSession session = request.getSession();
 
@@ -56,8 +44,8 @@ public class UpdateBasket extends HttpServlet
         String toppingname = request.getParameter("toppingname");
 
         for (BasketListDTO basketObj : updatedList) {
-            if(basketObj.getBottom().getName().equals(bottomname) && basketObj.getTopping().getName().equals(toppingname)) {
-                if(newAmount == 0) {
+            if (basketObj.getBottom().getName().equals(bottomname) && basketObj.getTopping().getName().equals(toppingname)) {
+                if (newAmount == 0) {
                     updatedList.remove(basketObj);
                 } else {
                     basketObj.setAmount(newAmount);
@@ -72,8 +60,7 @@ public class UpdateBasket extends HttpServlet
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

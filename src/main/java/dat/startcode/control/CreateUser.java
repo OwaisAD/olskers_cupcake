@@ -21,27 +21,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "createuser", urlPatterns = {"/createuser"} )
-public class CreateUser extends HttpServlet
-{
+@WebServlet(name = "createuser", urlPatterns = {"/createuser"})
+public class CreateUser extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException
-    {
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // You shouldn't end up here with a GET-request, thus you get sent back to frontpage
         doPost(request, response);
         response.sendRedirect("index.jsp");
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-    {
-      response.setContentType("text/html");
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.setAttribute("customer", null); // adding empty user object to session scope
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
@@ -54,31 +50,27 @@ public class CreateUser extends HttpServlet
         List<Bottom> bottomsList = null;
         List<Topping> toppingsList = null;
 
-        try
-        {
+        try {
             customer = new Customer(email, password, credit, role);
             customer = customerMapper.createProfile(customer);
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
 
-            session.setAttribute("email",email);
+            session.setAttribute("email", email);
             bottomsList = customerMapper.getAllBottoms();
             getServletContext().setAttribute("bottomlist", bottomsList);
 
             toppingsList = customerMapper.getAllToppings();
             getServletContext().setAttribute("toppinglist", toppingsList);
             request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
-        }
-        catch (DatabaseException e)
-        {
+        } catch (DatabaseException e) {
             Logger.getLogger("web").log(Level.SEVERE, e.getMessage());
             request.setAttribute("errormessage", e.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

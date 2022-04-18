@@ -1,7 +1,7 @@
 /* CSS stylesheet  for application */
 
 * {
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web', Times, serif;
 }
 
 body {
@@ -12,12 +12,12 @@ body {
 table {
     border-collapse: collapse;
     border: 1px solid silver;
-    padding:15px;
+    padding: 15px;
 }
 
 th, td {
     border: 1px solid silver;
-    padding:15px;
+    padding: 15px;
 }
 
 
@@ -62,7 +62,6 @@ th, td {
 }
 
 
-
 .div-around-left-side {
     /*border: 1px solid red;*/
     grid-area: left;
@@ -100,10 +99,12 @@ th, td {
     margin-top: 15px;
     margin-bottom: 10px;
 }
+
 .div-around-info p:nth-child(7) {
     margin-left: 85px;
     margin-bottom: 10px;
 }
+
 .div-around-info p:nth-child(8) {
     margin-left: 85px;
     margin-bottom: 40px;
@@ -218,8 +219,6 @@ label {
     margin-left: 67%;
     margin-bottom: 25px;
 }
-
-
 
 /*add media query for the above and make right side flex under left side*/
 @media (max-width: 1000px) {
