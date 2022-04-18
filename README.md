@@ -1,25 +1,33 @@
-# default-web-applikation
+![This is an image](https://raw.githubusercontent.com/OwaisAD/olskers_cupcake/main/src/main/webapp/images/headercupcakeimage.png)
 
-log
-https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing
 
 
 ## Om projektet
 ...
 
 ## Teknologier
-...
+###Programmering:
+Java (V. …)
+MySQL (V….)
+HTML5 og CSS3
+JSP
+
+###Brugte software:
+IntelliJ IDEA (V. …)
+MySQL Workbench(V…)
+Google Chrome
+
+###Frameworks:
+MySQL connector (V. …)
+JSTL (V….)
+Bootstrap (V…)
+
+#Logbog
+Her er et link til vores logbog gennem projektet
+https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing
+
 
 ## Hvordan køres projektet?
-....
-
-## Startkode på 2. semester forår 2022
-
-Dette repository er lavet i forbindelse med 2. semester på
-Datamatikeruddannelsen i Lyngby og på Bornholm forår 2022.
-
-## Du skal gøre følgende for at få webapplikationen i luften:
-
 1. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
 2. Beslut dig for hvad projektets database skal hedde. Det skal du bruge i næste punkt.
 3. Åbn Workbench og kør en tilpasset (med dit databasenavn i stedet for `startcode`) version af sql-filen `cupcake.sql`, som ligger i mappen `resources`. Den opretter en database med en user-tabel og en test-database.
