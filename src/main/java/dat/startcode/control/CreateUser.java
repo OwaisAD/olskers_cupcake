@@ -51,12 +51,8 @@ public class CreateUser extends HttpServlet
         int credit = 100;
         String role = "Customer";
 
-
-
         List<Bottom> bottomsList = null;
         List<Topping> toppingsList = null;
-
-
 
         try
         {
@@ -65,23 +61,12 @@ public class CreateUser extends HttpServlet
             session = request.getSession();
             session.setAttribute("customer", customer); // adding user object to session scope
 
-
-
-
-
             session.setAttribute("email",email);
-
-
             bottomsList = customerMapper.getAllBottoms();
             getServletContext().setAttribute("bottomlist", bottomsList);
 
             toppingsList = customerMapper.getAllToppings();
             getServletContext().setAttribute("toppinglist", toppingsList);
-
-
-
-
-
             request.getRequestDispatcher("WEB-INF/cupcakefactory.jsp").forward(request, response);
         }
         catch (DatabaseException e)
