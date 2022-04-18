@@ -25,7 +25,7 @@ Projektet er udført af:
 * JSTL (V….)
 * Bootstrap (V…)
 
-#Logbog
+# Logbog
 Her er et link til vores logbog gennem projektet
 https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing
 
