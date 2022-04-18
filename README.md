@@ -6,18 +6,18 @@
 ...
 
 ## Teknologier
-######Programmering:
+###### Programmering:
 * Java (V. …)
 * MySQL (V….)
 * HTML5 og CSS3
 * JSP
 
-######Brugte software:
+###### Brugte software:
 * IntelliJ IDEA (V. …)
 * MySQL Workbench(V…)
 * Safari, Google Chrome, Edge
 
-######Frameworks:
+###### Frameworks:
 * MySQL connector (V. …)
 * JSTL (V….)
 * Bootstrap (V…)
