@@ -1,23 +1,22 @@
 ![olskers_cupcake](https://raw.githubusercontent.com/OwaisAD/olskers_cupcake/main/src/main/webapp/images/headercupcakeimage.png)
 
-
-
 ## Om projektet
-...
+Lidt information omkring projektet.
+Tjek evt. rapporten ud under rapport mappen, for at dykke længere ned bag om projektet.
 
 ## Teknologier
-###### Programmering:
+##### Programmering:
 * Java (V. …)
 * MySQL (V….)
 * HTML5 og CSS3
 * JSP
 
-###### Brugte software:
+##### Brugte software:
 * IntelliJ IDEA (V. …)
 * MySQL Workbench(V…)
 * Safari, Google Chrome, Edge
 
-###### Frameworks:
+##### Frameworks:
 * MySQL connector (V. …)
 * JSTL (V….)
 * Bootstrap (V…)
@@ -29,9 +28,8 @@ https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/
 
 ## Hvordan køres projektet?
 1. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
-2. Beslut dig for hvad projektets database skal hedde. Det skal du bruge i næste punkt.
-3. Åbn Workbench og kør en tilpasset (med dit databasenavn i stedet for `startcode`) version af sql-filen `cupcake.sql`, som ligger i mappen `resources`. Den opretter en database med en user-tabel og en test-database.
-4. Du skal evt. ændre kodeord til databasen i projektet. Det gøres i filerne: `/persistence/ConnectionPool` i linie 14 og 15. Du skal også ændre i UserMapperTest.
+2. Åbn Workbench og kør sql-filen `cupcake3.sql`, som ligger i mappen `resources`. Den opretter de nødvendige databaser.
+3. Du skal nok ændre kodeord til databasen i projektet. Det gøres under model-delen i filerne: `/persistence/ConnectionPool` i linie 13 og 14.
 5. Til sidst skal du lave en Tomcat konfiguration. Dvs, 
    1. klik på "Add Configuration ..."
    2. Klik på "+" og vælg "Tomcat Server Local".
