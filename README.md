@@ -4,9 +4,9 @@
 Lidt information omkring projektet.
 Tjek evt. rapporten ud under rapport mappen, for at dykke længere ned bag om projektet.
 Projektet er udført af:
-- @OwaisAD
-- @Wolfgang1235
-- @thomasfritzgboger
+- [@OwaisAD](https://github.com/OwaisAD) to go to my Quora profile.
+- [@Wolfgang1235](https://github.com/Wolfgang1235) to go to my Quora profile.
+- [@thomasfritzgboger](https://github.com/thomasfritzboger) to go to my Quora profile.
 
 ## Teknologier
 ##### Programmering:
