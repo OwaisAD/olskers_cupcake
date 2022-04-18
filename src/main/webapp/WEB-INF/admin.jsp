@@ -15,6 +15,37 @@
     <jsp:body>
 
         <h3>Her listen over alle kunders ordrer</h3>
+
+
+        <c:if test="${requestScope.orderlineDescriptionDTO != null}">
+            <p>Den valgte ordre: </p>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Order Id</th>
+                    <th>Bund</th>
+                    <th>Topping</th>
+                    <th>Stykpris</th>
+                    <th>Antal</th>
+                    <th>Saldo sum</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="orderline"
+                           items="${requestScope.orderlineDescriptionDTO}">
+                    <tr>
+                        <td>${orderline.orderId}</td>
+                        <td>${orderline.bottom}</td>
+                        <td>${orderline.topping}</td>
+                        <td>${orderline.price}</td>
+                        <td>${orderline.amount}</td>
+                        <td>${orderline.totalSum}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -39,67 +70,15 @@
 
                     <!--  Nedenstående viser alle ordrerlinjer kan ikke sortere  -->
                     <td> </div>
-
                         <form method="post">
-
-
-                            <!-- Button trigger modal -->
                             <button formaction="OrderDescription" name="orderId" value="${order.orderId}"
                                     class="btn btn-secondary">
                                 Se ordreindhold!
-
                             </button>
-
                         </form>
-
                     </td>
-
-
                 </tr>
             </c:forEach>
-
-            <!-- Modal -->
-            <c:if test="${requestScope.orderlineDescriptionDTO != null}">
-
-                <table class="table table-striped">
-                    <thead>
-
-                    <tr>
-                        <th>Order Id</th>
-                        <th>Bund</th>
-                        <th>Topping</th>
-                        <th>Stykpris</th>
-                        <th>Antal</th>
-                        <th>Saldo sum</th>
-                    </tr>
-
-
-                    </thead>
-                    <tbody>
-
-
-                    <c:forEach var="orderline"
-                               items="${requestScope.orderlineDescriptionDTO}">
-
-                        <tr>
-                            <td>${orderline.orderId}</td>
-                            <td>${orderline.bottom}</td>
-                            <td>${orderline.topping}</td>
-                            <td>${orderline.price}</td>
-                            <td>${orderline.amount}</td>
-                            <td>${orderline.totalSum}</td>
-                        </tr>
-
-                    </c:forEach>
-
-
-                    </tbody>
-
-
-                </table>
-
-            </c:if>
-
 
 
             </tbody>
