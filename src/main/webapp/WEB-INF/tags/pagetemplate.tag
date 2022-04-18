@@ -34,17 +34,19 @@
 <header style="padding: 0px 52px;">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container" style="padding: 5px;">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <c:if test="${sessionScope.admin != null }">
-                        <form action="AdminNavigation" method="get">
-                            <button class="btn btn-secondary" type="submit" id="ordrer" name="handling" value="Ordrer">Ordrer</button>
-                            <button class="btn btn-secondary" type="submit" id="kunder" name="handling" value="Kunder">Kunder</button>
-                        </form>
+                        <div class="position-absolute top-50 start-0 translate-middle" style="margin-left: 11.5%">
+                            <form action="AdminNavigation" method="get">
+                                <button class="btn btn-secondary" type="submit" id="ordrer" name="handling" value="Ordrer">Ordrer</button>
+                                <button class="btn btn-secondary" type="submit" id="kunder" name="handling" value="Kunder">Kunder</button>
+                            </form>
+                        </div>
                     </c:if>
                     <c:if test="${sessionScope.customer != null }">
                         <a class="nav-item nav-link">${sessionScope.email}</a>
