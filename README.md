@@ -3,6 +3,10 @@
 ## Om projektet
 Lidt information omkring projektet.
 Tjek evt. rapporten ud under rapport mappen, for at dykke længere ned bag om projektet.
+Projektet er udført af:
+- @OwaisAD
+- @Wolfgang1235
+- @thomasfritzgboger
 
 ## Teknologier
 ##### Programmering:
