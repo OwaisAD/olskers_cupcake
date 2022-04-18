@@ -1,4 +1,4 @@
-![This is an image](https://raw.githubusercontent.com/OwaisAD/olskers_cupcake/main/src/main/webapp/images/headercupcakeimage.png)
+![olskers_cupcake](https://raw.githubusercontent.com/OwaisAD/olskers_cupcake/main/src/main/webapp/images/headercupcakeimage.png)
 
 
 
@@ -6,21 +6,21 @@
 ...
 
 ## Teknologier
-###Programmering:
-Java (V. …)
-MySQL (V….)
-HTML5 og CSS3
-JSP
+######Programmering:
+* Java (V. …)
+* MySQL (V….)
+* HTML5 og CSS3
+* JSP
 
-###Brugte software:
-IntelliJ IDEA (V. …)
-MySQL Workbench(V…)
-Google Chrome
+######Brugte software:
+* IntelliJ IDEA (V. …)
+* MySQL Workbench(V…)
+* Safari, Google Chrome, Edge
 
-###Frameworks:
-MySQL connector (V. …)
-JSTL (V….)
-Bootstrap (V…)
+######Frameworks:
+* MySQL connector (V. …)
+* JSTL (V….)
+* Bootstrap (V…)
 
 #Logbog
 Her er et link til vores logbog gennem projektet
