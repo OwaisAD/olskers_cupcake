@@ -2,7 +2,7 @@
 
 ## Om projektet
 Lidt information omkring projektet.
-Tjek evt. rapporten ud under rapport mappen, for at dykke længere ned bag om projektet.
+Tjek evt. rapporten ud under dokumentation/rapport mappen, for at dykke længere ned bag om projektet.
 Projektet er udført af:
 - [OwaisAD](https://github.com/OwaisAD)
 - [Wolfgang1235](https://github.com/Wolfgang1235)
