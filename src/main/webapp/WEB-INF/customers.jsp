@@ -48,7 +48,7 @@
                                             <br>
                                             <label for="amount">Beløb:</label>
                                             <br>
-                                            <input type="number" id="amount" name="amount" required/>
+                                            <input type="number" id="amount" name="amount" required min="1" max="1500" size="20"/>
                                             <br>
                                             <br>
                                             <button type="submit" class="btn btn-dark">
