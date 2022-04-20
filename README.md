@@ -2,32 +2,16 @@
 
 ## Om projektet
 Lidt information omkring projektet.
-Tjek evt. rapporten ud under rapport mappen, for at dykke længere ned bag om projektet.
+Tjek evt. rapporten ud under dokumentation/rapport mappen, for at dykke længere ned bag om projektet.
 Projektet er udført af:
 - [OwaisAD](https://github.com/OwaisAD)
 - [Wolfgang1235](https://github.com/Wolfgang1235)
 - [thomasfritzgboger](https://github.com/thomasfritzboger)
 
-## Teknologier
-##### Programmering:
-* Java (V. …)
-* MySQL (V….)
-* HTML5 og CSS3
-* JSP
-
-##### Brugte software:
-* IntelliJ IDEA (V. …)
-* MySQL Workbench(V…)
-* Safari, Google Chrome, Edge
-
-##### Frameworks:
-* MySQL connector (V. …)
-* JSTL (V….)
-* Bootstrap (V…)
 
 # Logbog
 Her er et link til vores logbog gennem projektet
-https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing
+- [LOGBOG](https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing)
 
 
 ## Hvordan køres projektet?
