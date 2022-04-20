@@ -8,22 +8,6 @@ Projektet er udført af:
 - [Wolfgang1235](https://github.com/Wolfgang1235)
 - [thomasfritzgboger](https://github.com/thomasfritzboger)
 
-## Teknologier
-##### Programmering:
-* Java (V. …)
-* MySQL (V….)
-* HTML5 og CSS3
-* JSP
-
-##### Brugte software:
-* IntelliJ IDEA (V. …)
-* MySQL Workbench(V…)
-* Safari, Google Chrome, Edge
-
-##### Frameworks:
-* MySQL connector (V. …)
-* JSTL (V….)
-* Bootstrap (V…)
 
 # Logbog
 Her er et link til vores logbog gennem projektet
