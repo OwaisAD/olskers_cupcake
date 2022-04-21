@@ -1,18 +1,15 @@
 ![olskers_cupcake](https://raw.githubusercontent.com/OwaisAD/olskers_cupcake/main/src/main/webapp/images/headercupcakeimage.png)
 
 ## Om projektet
-Lidt information omkring projektet.
-Tjek evt. rapporten ud under dokumentation/rapport mappen, for at dykke længere ned bag om projektet.
+Vores rapport omkring projektet kan tilgås og læses her '[dokumentation/rapport](https://github.com/OwaisAD/olskers_cupcake/blob/main/dokumentation/rapport/Cupcake_rapport.pdf)'. <br> <br>
 Projektet er udført af:
 - [OwaisAD](https://github.com/OwaisAD)
 - [Wolfgang1235](https://github.com/Wolfgang1235)
 - [thomasfritzgboger](https://github.com/thomasfritzboger)
 
-# Rapport
-Rapporten kan læses under mappen dokumentation/rapport
 
 # Logbog
-Her er et link til vores logbog gennem projektet
+Her er et link til vores logbog
 - [LOGBOG](https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing)
 
 
