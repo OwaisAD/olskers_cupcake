@@ -38,4 +38,4 @@ Funktionelt kan applikationen:
 - Hvis man indtaster ugyldige data under indlogning, bliver man sendt til en en fejlside.
 
 ## MVC arkitektur
-![](documentation/mvc.jpg)
+![](dokumentation/mvc.jpg)
