@@ -50,7 +50,7 @@ public class CreateOrder extends HttpServlet
 
         // get the list from session scope
         List<BasketListDTO> updatedList = (List<BasketListDTO>) session.getAttribute("basketlist");
-        System.out.println(updatedList);
+
         //get the customer by email
         String email = (String) session.getAttribute("email");
 
@@ -83,7 +83,7 @@ public class CreateOrder extends HttpServlet
                 int toppingId = (i.getTopping().getToppingId());
 
                 orderline = new Orderline(orderId, quantity, totalPrice, bottomId, toppingId);
-                System.out.println("This orderline will be inserted in the orderlines table: " + orderline);
+                //System.out.println("This orderline will be inserted in the orderlines table: " + orderline);
                 customerMapper.createOrderline(orderline);
             }
 
@@ -99,7 +99,7 @@ public class CreateOrder extends HttpServlet
 
             List<OrderlineDescriptionDTO> list = customerMapper.getCustermersOrders(email);
             session.setAttribute("list",list);
-            System.out.println(list.size());
+            //System.out.println(list.size());
 
             //send til profil side
             request.getRequestDispatcher("WEB-INF/profil.jsp").forward(request, response);

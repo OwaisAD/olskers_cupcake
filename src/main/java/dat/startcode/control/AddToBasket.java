@@ -58,15 +58,12 @@ public class AddToBasket extends HttpServlet
             CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
             Bottom bottom = customerMapper.getBottomById(bottomId);
-            System.out.println(bottom);
             Topping topping = customerMapper.getToppingById(toppingId);
-            System.out.println(topping);
             Cupcake cupcake = new Cupcake(bottom, topping);
 
             pricetotal += cupcake.getPrice()*currAmount;
 
             BasketListDTO basketListDTO = new BasketListDTO(bottom, topping, currAmount);
-            System.out.println(basketListDTO);
 
             //iterer over vores liste
             // sammenlign bund og topping
