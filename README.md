@@ -8,6 +8,8 @@ Projektet er udført af:
 - [Wolfgang1235](https://github.com/Wolfgang1235)
 - [thomasfritzgboger](https://github.com/thomasfritzboger)
 
+# Rapport
+Rapporten kan læses under mappen dokumentation/rapport
 
 # Logbog
 Her er et link til vores logbog gennem projektet
