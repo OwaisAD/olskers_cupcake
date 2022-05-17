@@ -13,6 +13,9 @@ Her er et link til vores logbog
 - [LOGBOG](https://docs.google.com/document/d/1u9PVX1bcuwbz_frAPK2hl1X3iWgCtnZhplq3GeTw7UY/edit?usp=sharing)
 
 
+## Tjek siden ud
+[Olskers cupcakes](http://46.101.240.195:8080/cupcake/)
+
 ## Hvordan køres projektet?
 1. Først skal du clone projektet eller downloade en zip-fil med projektet til din arbejdsstation.
 2. Åbn Workbench og kør sql-filen `cupcake3.sql`, som ligger i mappen `resources`. Den opretter de nødvendige databaser.
